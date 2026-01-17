@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layanan Investigasi & Pelacakan Data 2026</title>
+
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #0f1115;
+        color: #e0e0e0;
+        line-height: 1.6;
+    }
+
+    header {
+        background: #151922;
+        padding: 25px;
+        text-align: center;
+        border-bottom: 1px solid #2a2f3a;
+    }
+
+    header h1 {
+        margin: 0;
+        color: #00e0ff;
+        font-size: 24px;
+    }
+
+    header p {
+        margin-top: 8px;
+        color: #a0a8b3;
+        font-size: 14px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .menu button {
+        background: #1c2230;
+        color: #ffffff;
+        border: 1px solid #2f3747;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .menu button:hover {
+        background: #00e0ff;
+        color: #000;
+    }
+
+    .content {
+        display: none;
+        background: #151922;
+        border: 1px solid #2a2f3a;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+    }
+
+    .content h2 {
+        color: #00e0ff;
+        margin-top: 0;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        color: #777;
+        border-top: 1px solid #2a2f3a;
+    }
+	.legal-center {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #cfd3da;
+}
+
+.legal-center h2 {
+    font-size: 15px;
+    margin: 14px 0 8px;
+    color: #00e0ff;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.legal-center p {
+    font-size: 12px;          /* DIPERKECIL */
+    line-height: 1.45;
+    margin: 4px 0;            /* JARAK RAPAT */
+    text-align: center;       /* PAKSA CENTER */
+}
+
+.legal-strong {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 6px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>LAYANAN INVESTIGASI & PELACAKAN DATA (2026)</h1>
+    <p>Seluruh layanan berbasis penelusuran data digital (cyber) — Tertawa di depan layar, menangis saat data mulai bicara</p>
+</header>
+
+<div class="container">
+
+<div class="menu">
+    <button onclick="showContent('layanan1')">1. Lacak HP Hilang (IMEI)</button>
+    <button onclick="showContent('layanan2')">2. Cek Lokasi Nomor HP</button>
+    <button onclick="showContent('layanan3')">3. Cek Data Akun Media Sosial</button>
+    <button onclick="showContent('layanan4')">4. Lacak Lokasi Akun Medsos</button>
+    <button onclick="showContent('layanan5')">5. Recovery Akun Medsos</button>
+    <button onclick="showContent('layanan6')">6. Investigasi Data</button>
+    <button onclick="showContent('layanan7')">7. Investigasi Kasus</button>
+    <button onclick="showContent('layanan8')">8. Takedown Akun</button>
+    <button onclick="showContent('pembayaran')">Sistem Pembayaran</button>
+
+</div>
+
+<div id="layanan1" class="content">
+<h2>1. Lacak HP Hilang (Melalui IMEI)</h2>
+Harga Layanan:
+• Cek lokasi HP saja: Rp300.000
+• Cek lokasi + identitas pengguna: Rp500.000
+
+Cara Kerja (Singkat):
+IMEI HP dicek untuk melihat apakah HP masih aktif dan terhubung ke jaringan operator.
+
+Hasil yang Didapat:
+• Perkiraan lokasi HP (bukan titik GPS tepat)
+• Titik lokasi di Google Maps
+• Informasi jaringan operator
+• Data pemilik nomor (jika tersedia)
+
+Penting untuk Dipahami:
+• Lokasi adalah perkiraan sinyal BTS, bukan lokasi akurat
+• Perkiraan jarak ±500 meter
+• Jika HP masih memakai nomor lama, maka nomor lama yang terdeteksi
+• Jika nomor sudah diganti, yang terbaca adalah nomor baru
+• Kepemilikan nomor baru bisa ditelusuri lebih lanjut jika datanya tersedia
+
+Cek Awal:
+• Biaya cek IMEI awal: Rp50.000
+• Jika ada data → lanjut
+• Jika tidak ada data → proses berhenti
+
+Note: IMEI dikirim via teks, bukan foto.
+</div>
+
+<div id="layanan2" class="content">
+<h2>2. Cek Lokasi Posisi Nomor HP (1 Kali Cek)</h2>
+Harga Layanan:
+• Rp200.000
+
+Cara Kerja:
+Nomor HP dicek untuk mengetahui perkiraan lokasi terakhir atau saat ini ketika nomor tersebut terhubung ke jaringan operator (BTS).
+Layanan ini bukan share location / GPS real-time.
+
+Hasil:
+• Perkiraan lokasi terakhir nomor terdeteksi
+• Titik lokasi di Google Maps
+• Koordinat latitude & longitude
+• Informasi BTS (LAC / CI)
+• Waktu & usia data
+• Analisis perkiraan area lokasi
+
+Penting untuk Dipahami:
+• Lokasi yang diberikan adalah perkiraan area, bukan titik posisi tepat
+• Hasil tidak menunjukkan posisi persis target
+• Klien perlu melakukan penyisiran dan pengamatan di area yang kami berikan
+
+Cek Awal:
+• Biaya cek awal: Rp50.000
+• Jika data ADA → lanjut bayar Rp150.000
+(total menjadi Rp200.000)
+• Jika data TIDAK ADA → tidak ada biaya lanjutan
+</div>
+
+<div id="layanan3" class="content">
+<h2>3. Cek Data Akun Media Sosial</h2>
+Harga:
+• Akun biasa: Rp1.500.000 (DP 25%: Rp375.000)
+• Fake akun / minim jejak: Rp3.500.000 (DP Rp875.000)
+• Fake akun TikTok: Rp5.000.000 (DP Rp1.250.000)
+
+Penjelasan Singkat (Wajib Dibaca):
+• Layanan ini menganalisis jejak digital akun, bukan menebak atau mengarang data.
+• Jika akun menggunakan data asli, peluang menemukan identitas lebih besar.
+• Jika akun menggunakan data palsu / samaran, hasil bisa terbatas, tergantung jejak digital yang tersedia.
+
+FAQ Singkat – Bisa Ketahuan atau Tidak?
+• Apakah identitas akun pasti ketahuan?
+❌ Tidak selalu. Tergantung seberapa kuat jejak digital akun tersebut.
+
+• Kalau akun pakai data palsu?
+Masih bisa dianalisis, namun tidak menjamin nama asli langsung ditemukan.
+
+• Data apa yang biasanya bisa didapat dari akun palsu?
+Username, ID akun, pola aktivitas, wilayah login, serta keterkaitan akun lain (jika ada).
+
+• Kenapa akun palsu lebih mahal?
+Karena proses analisis lebih sulit dan jejak data lebih minim.
+
+Hasil yang Diberikan:
+• Username & ID akun
+• Email / nomor HP (jika terhubung dan terdeteksi)
+• Wilayah & waktu akses
+• Jejak aktivitas akun
+• Identitas pemilik (jika data pendukung tersedia)
+
+SISTEM PEMBAYARAN
+• DP 25% dibayarkan di awal sesuai paket yang dipilih
+• Pelunasan dibayarkan jika data ditemukan
+• Jika tidak ada data sama sekali yang didapatkan,
+➜ uang dikembalikan 100% utuh (DP full refund)
+
+</div>
+
+<div id="layanan4" class="content">
+<h2>4. Lacak Lokasi Akun Media Sosial</h2>
+Harga:
+• Rp700.000
+
+Penjelasan Singkat (Wajib Dipahami):
+Layanan ini digunakan untuk mengetahui perkiraan lokasi saat akun terakhir login, berdasarkan jejak akses akun.
+Bukan share location dan bukan titik GPS real-time.
+
+Hasil:
+• Lokasi login terakhir
+• Wilayah/kota
+• Estimasi radius
+• Waktu login
+
+Penting untuk Dipahami:
+• Lokasi yang diberikan adalah perkiraan area, bukan alamat atau titik tepat
+• Akurasi tergantung pada:
+• Aktivitas akun
+• Data login yang tersedia
+• Sistem keamanan platform
+• Hasil tidak menunjukkan posisi akun saat ini secara real-time
+• Digunakan sebagai petunjuk awal, bukan pelacakan langsung
+
+Cocok Digunakan Untuk:
+•	Mengetahui akun diakses dari kota / wilayah mana
+•	Menguatkan dugaan lokasi pemilik akun
+•	Pendalaman investigasi lanjutan
+
+</div>
+
+<div id="layanan5" class="content">
+<h2>5. Recovery Akun Media Sosial</h2>
+Harga:
+• Rp1.000.000 per 1.000 followers
+• Perhitungan dibulatkan ke atas
+
+Rumus:
+(Jumlah followers ÷ 1.000) → dibulatkan ke atas × Rp1.000.000
+
+DP:
+• 25% di awal
+• Gagal → uang kembali utuh
+
+Estimasi proses: 3–7 hari kerja
+</div>
+
+<div id="layanan6" class="content">
+<h2>6. Investigasi Data (Nomor / Foto / Rekening)</h2>
+Biaya:
+Rp500.000
+
+Data yang Bisa Dikirim:
+Tidak wajib memiliki data lengkap.
+Cukup salah satu dari berikut:
+• Nomor HP saja
+• Foto saja
+• Rekening bank saja
+Jika memiliki lebih dari satu data, proses pencarian akan lebih cepat dan hasil lebih kuat.
+
+Hasil:
+• Identitas pemilik
+• Nomor aktif (jika tersedia)
+• Foto
+• Data keluarga (jika tersedia)
+
+Catatan:
+Jika tidak ada data → GRATIS
+</div>
+
+<div id="layanan7" class="content">
+<h2>7. Investigasi Data Kasus</h2>
+(Penipuan, Pencurian, Perselingkuhan)
+Harga:
+Rp2.500.000 (buka berkas)
+Fee sukses: Rp2.000.000
+
+Penjelasan Penting (Wajib Dipahami):
+Layanan ini tidak bisa berjalan hanya dari data digital saja.
+Klien wajib memiliki atau menyiapkan orang lapangan.
+Investigasi dilakukan dengan kerja sama dua arah antara:
+•	Tim analisis data digital (cyber)
+•	Orang lapangan di lokasi
+
+Layanan ini cocok untuk kasus orang yang sudah kabur, berpindah-pindah lokasi, atau kasus yang sudah viral.
+Fokus kami adalah mengolah dan mencari data terbaru, bukan mengulang atau mengandalkan data lama.
+
+Alur Kerja Investigasi:
+1.	Klien memberikan data awal (nomor, akun, foto, lokasi terakhir, kronologi, dll).
+2.	Tim digital menganalisis data untuk mencari jejak terbaru, identitas, dan pola pergerakan.
+3.	Hasil analisis dikirim ke orang lapangan sebagai petunjuk arah.
+4.	Orang lapangan melakukan pengecekan langsung di lokasi.
+5.	Temuan dari lapangan dikirim kembali ke tim digital.
+6.	Data diperdalam kembali hingga mencapai titik informasi yang paling akurat.
+Proses ini dilakukan berulang dan saling melengkapi sampai data benar-benar kuat.
+
+Hasil yang Diberikan:
+•	Identitas pihak terkait
+•	Lokasi dan pergerakan yang relevan
+•	Pola aktivitas terbaru
+•	Laporan hasil investigasi berbasis data digital dan lapangan
+
+Catatan Tambahan:
+•	Fokus utama adalah data baru dan pergerakan terkini
+•	Data lama hanya digunakan sebagai pembanding, bukan acuan utama
+•	Tanpa orang lapangan, hasil tidak akan maksimal
+</div>
+
+<div id="layanan8" class="content">
+<h2>8. Takedown Akun (Nonaktif Permanen)</h2>
+Instagram / Twitter / X:
+• Rp3.000.000
+• DP Rp1.000.000
+• Gagal → DP kembali Rp500.000
+(sebagian dipakai untuk biaya proses dan tools)
+
+TikTok:
+• Rp4.000.000
+• DP Rp1.500.000
+• Gagal → DP kembali Rp750.000
+(sebagian dipakai untuk biaya proses dan tools)
+
+Catatan:
+• Tidak instan
+• Pelunasan jika berhasil
+
+Hasil:
+Akun benar-benar tidak bisa digunakan lagi (nonaktif permanen).
+</div>
+
+<div id="pembayaran" class="content">
+<h2>Sistem Pembayaran</h2>
+• Skema pembayaran mengikuti masing-masing layanan
+• Cek awal: bayar cek → lanjut jika data ada
+• DP 25%: untuk layanan analisis & recovery
+• Bayar jika berhasil: investigasi data tertentu
+• Investigasi kasus: Rp2.500.000 buka berkas + Rp2.000.000 fee sukses
+• Takedown akun: DP di awal, pelunasan jika berhasil, gagal DP kembali sebagian
+
+PERSETUJUAN
+Dengan melakukan pembayaran, klien dianggap setuju dengan seluruh ketentuan layanan.
+Tidak ada pembatalan (cancel) setelah proses dimulai.
+
+</div>
+
+
+<div class="legal-center">
+    <h2>DISCLAIMER & PRIVASI</h2>
+
+    <p>
+        Seluruh layanan hanya sebatas analisis dan penelusuran data digital (cyber)
+        serta penyusunan dan pengiriman berkas. Kami tidak melakukan tindakan
+        lapangan, pendampingan, pelaporan hukum, atau eksekusi apa pun.
+    </p>
+
+    <p>
+        Seluruh tindak lanjut di lapangan sepenuhnya menjadi tanggung jawab klien.
+    </p>
+
+    <p>
+        Data dan berkas yang diberikan bersifat rahasia, dilarang disebarluaskan,
+        dan tidak berlaku sebagai pendukung pelaporan hukum atau proses peradilan.
+        Data hanya diperbolehkan digunakan untuk kepentingan mediasi atau
+        restoratif justice.
+    </p>
+
+    <p class="legal-strong">
+        Dengan menerima berkas dan melakukan pembayaran, klien dianggap memahami
+        dan menyetujui seluruh batasan layanan ini.
+    </p>
+
+    <h2>PRIVASI & KERAHASIAAN</h2>
+
+    <p>
+        Seluruh data dan hasil investigasi bersifat rahasia dan tidak dibagikan ke
+        pihak mana pun.
+    </p>
+</div>
+
+
+</div>
+
+<footer>
+© 2026 — Layanan Investigasi & Pelacakan Data
+</footer>
+
+<script>
+function showContent(id) {
+    document.querySelectorAll('.content').forEach(el => el.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
