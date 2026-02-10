@@ -5,142 +5,127 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Layanan Investigasi & Pelacakan Data 2026</title>
 
-
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: #0f1115;
-        color: #e0e0e0;
-        line-height: 1.6;
-    }
-
-    header {
-        background: #151922;
-        padding: 25px;
-        text-align: center;
-        border-bottom: 1px solid #2a2f3a;
-    }
-
-    header h1 {
-        margin: 0;
-        color: #00e0ff;
-        font-size: 24px;
-    }
-
-    header p {
-        margin-top: 8px;
-        color: #a0a8b3;
-        font-size: 14px;
-    }
-
-    .container {
-        max-width: 1100px;
-        margin: auto;
-        padding: 20px;
-    }
-
-    .menu {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 12px;
-        margin-bottom: 25px;
-    }
-
-    .menu button {
-        background: #1c2230;
-        color: #ffffff;
-        border: 1px solid #2f3747;
-        padding: 15px;
-        cursor: pointer;
-        font-size: 14px;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-    }
-
-    .menu button:hover {
-        background: #00e0ff;
-        color: #000;
-    }
-
-    .content {
-        display: none;
-        background: #151922;
-        border: 1px solid #2a2f3a;
-        padding: 20px;
-        border-radius: 6px;
-        margin-bottom: 20px;
-        white-space: pre-wrap;
-    }
-
-    .content h2 {
-        color: #00e0ff;
-        margin-top: 0;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
-        font-size: 12px;
-        color: #777;
-        border-top: 1px solid #2a2f3a;
-    }
-	.legal-center {
-    width: 100%;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    text-align: center;
-    color: #cfd3da;
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f1115;
+    color:#e0e0e0;
+    line-height:1.6;
 }
-
-.legal-center h2 {
-    font-size: 15px;
-    margin: 14px 0 8px;
-    color: #00e0ff;
-    font-weight: 600;
-    letter-spacing: 0.4px;
+header{
+    background:#151922;
+    padding:25px;
+    text-align:center;
+    border-bottom:1px solid #2a2f3a;
 }
-
-.legal-center p {
-    font-size: 12px;          /* DIPERKECIL */
-    line-height: 1.45;
-    margin: 4px 0;            /* JARAK RAPAT */
-    text-align: center;       /* PAKSA CENTER */
+header h1{
+    margin:0;
+    color:#00e0ff;
+    font-size:24px;
 }
-
-.legal-strong {
-    font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-top: 6px;
+header p{
+    margin-top:8px;
+    color:#a0a8b3;
+    font-size:14px;
 }
-
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:12px;
+    margin-bottom:25px;
+}
+.menu button{
+    background:#1c2230;
+    color:#fff;
+    border:1px solid #2f3747;
+    padding:15px;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+.menu button:hover{
+    background:#00e0ff;
+    color:#000;
+}
+.content{
+    display:none;
+    background:#151922;
+    border:1px solid #2a2f3a;
+    padding:20px;
+    border-radius:6px;
+    margin-bottom:20px;
+}
+.content h2{
+    color:#00e0ff;
+    margin-top:0;
+}
+textarea{
+    width:100%;
+    min-height:320px;
+    background:#0f1115;
+    color:#e0e0e0;
+    border:1px solid #2f3747;
+    border-radius:6px;
+    padding:14px;
+    font-size:13px;
+    line-height:1.55;
+    resize:vertical;
+}
+.copy-btn{
+    margin-top:10px;
+    background:#00e0ff;
+    color:#000;
+    border:none;
+    padding:10px 16px;
+    font-size:13px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.copy-status{
+    margin-top:6px;
+    font-size:12px;
+    color:#7fffd4;
+}
+footer{
+    text-align:center;
+    padding:20px;
+    font-size:12px;
+    color:#777;
+    border-top:1px solid #2a2f3a;
+}
 </style>
 </head>
+
 <body>
 
 <header>
-    <h1>LAYANAN INVESTIGASI & PELACAKAN DATA (2026)</h1>
-    <p>Seluruh layanan berbasis penelusuran data digital (cyber) — Tertawa di depan layar, menangis saat data mulai bicara</p>
+<h1>LAYANAN INVESTIGASI & PELACAKAN DATA (2026)</h1>
+<p>Seluruh layanan berbasis penelusuran data digital (cyber)</p>
 </header>
 
 <div class="container">
 
 <div class="menu">
-    <button onclick="showContent('layanan1')">1. Lacak HP Hilang (IMEI)</button>
-    <button onclick="showContent('layanan2')">2. Cek Lokasi Nomor HP</button>
-    <button onclick="showContent('layanan3')">3. Cek Data Akun Media Sosial</button>
-    <button onclick="showContent('layanan4')">4. Lacak Lokasi Akun Medsos</button>
-    <button onclick="showContent('layanan5')">5. Recovery Akun Medsos</button>
-    <button onclick="showContent('layanan6')">6. Investigasi Data</button>
-    <button onclick="showContent('layanan7')">7. Investigasi Kasus</button>
-    <button onclick="showContent('layanan8')">8. Takedown Akun</button>
-    <button onclick="showContent('pembayaran')">Sistem Pembayaran</button>
-
+<button onclick="show('l1')">1. Lacak HP Hilang (IMEI)</button>
+<button onclick="show('l2')">2. Cek Lokasi Nomor HP</button>
+<button onclick="show('l3')">3. Cek Data Akun Media Sosial</button>
+<button onclick="show('l4')">4. Lacak Lokasi Akun Medsos</button>
+<button onclick="show('l5')">5. Recovery Akun Medsos</button>
+<button onclick="show('l6')">6. Investigasi Data</button>
+<button onclick="show('l7')">7. Investigasi Kasus</button>
+<button onclick="show('l8')">8. Takedown Akun</button>
+<button onclick="show('pay')">Sistem Pembayaran</button>
 </div>
 
-<div id="layanan1" class="content">
+<div id="l1" class="content">
 <h2>1. Lacak HP Hilang (Melalui IMEI)</h2>
+<textarea readonly>
 Harga Layanan:
 • Cek lokasi HP saja: Rp300.000
 • Cek lokasi + identitas pengguna: Rp500.000
@@ -167,10 +152,14 @@ Cek Awal:
 • Jika tidak ada data → proses berhenti
 
 Note: IMEI dikirim via teks, bukan foto.
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="layanan2" class="content">
-<h2>2. Cek Lokasi Posisi Nomor HP (1 Kali Cek)</h2>
+<div id="l2" class="content">
+<h2>2. Cek Lokasi Posisi Nomor HP</h2>
+<textarea readonly>
 Harga Layanan:
 • Rp200.000
 
@@ -196,10 +185,14 @@ Cek Awal:
 • Jika data ADA → lanjut bayar Rp150.000
 (total menjadi Rp200.000)
 • Jika data TIDAK ADA → tidak ada biaya lanjutan
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="layanan3" class="content">
+<div id="l3" class="content">
 <h2>3. Cek Data Akun Media Sosial</h2>
+<textarea readonly>
 Harga:
 • Akun biasa: Rp1.500.000 (DP 25%: Rp375.000)
 • Fake akun / minim jejak: Rp3.500.000 (DP Rp875.000)
@@ -235,11 +228,14 @@ SISTEM PEMBAYARAN
 • Pelunasan dibayarkan jika data ditemukan
 • Jika tidak ada data sama sekali yang didapatkan,
 ➜ uang dikembalikan 100% utuh (DP full refund)
-
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="layanan4" class="content">
+<div id="l4" class="content">
 <h2>4. Lacak Lokasi Akun Media Sosial</h2>
+<textarea readonly>
 Harga:
 • Rp700.000
 
@@ -263,14 +259,17 @@ Penting untuk Dipahami:
 • Digunakan sebagai petunjuk awal, bukan pelacakan langsung
 
 Cocok Digunakan Untuk:
-•	Mengetahui akun diakses dari kota / wilayah mana
-•	Menguatkan dugaan lokasi pemilik akun
-•	Pendalaman investigasi lanjutan
-
+• Mengetahui akun diakses dari kota / wilayah mana
+• Menguatkan dugaan lokasi pemilik akun
+• Pendalaman investigasi lanjutan
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="layanan5" class="content">
+<div id="l5" class="content">
 <h2>5. Recovery Akun Media Sosial</h2>
+<textarea readonly>
 Harga:
 • Rp1.000.000 per 1.000 followers
 • Perhitungan dibulatkan ke atas
@@ -283,20 +282,21 @@ DP:
 • Gagal → uang kembali utuh
 
 Estimasi proses: 3–7 hari kerja
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="layanan6" class="content">
-<h2>6. Investigasi Data (Nomor / Foto / Rekening)</h2>
+<div id="l6" class="content">
+<h2>6. Investigasi Data</h2>
+<textarea readonly>
 Biaya:
 Rp500.000
 
 Data yang Bisa Dikirim:
-Tidak wajib memiliki data lengkap.
-Cukup salah satu dari berikut:
-• Nomor HP saja
-• Foto saja
-• Rekening bank saja
-Jika memiliki lebih dari satu data, proses pencarian akan lebih cepat dan hasil lebih kuat.
+• Nomor HP
+• Foto
+• Rekening bank
 
 Hasil:
 • Identitas pemilik
@@ -306,82 +306,84 @@ Hasil:
 
 Catatan:
 Jika tidak ada data → GRATIS
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="layanan7" class="content">
-<h2>7. Investigasi Data Kasus</h2>
-(Penipuan, Pencurian, Perselingkuhan)
+<div id="l7" class="content">
+<h2>7. Investigasi Kasus</h2>
+<textarea readonly>
 Harga:
-Rp2.500.000 (buka berkas)
+Rp2.500.000 buka berkas
 Fee sukses: Rp2.000.000
 
-Penjelasan Penting (Wajib Dipahami):
-Layanan ini tidak bisa berjalan hanya dari data digital saja.
-Klien wajib memiliki atau menyiapkan orang lapangan.
-Investigasi dilakukan dengan kerja sama dua arah antara:
-•	Tim analisis data digital (cyber)
-•	Orang lapangan di lokasi
+Layanan ini menggabungkan analisis data digital dan kerja lapangan.
+Klien wajib memiliki orang lapangan.
 
-Layanan ini cocok untuk kasus orang yang sudah kabur, berpindah-pindah lokasi, atau kasus yang sudah viral.
-Fokus kami adalah mengolah dan mencari data terbaru, bukan mengulang atau mengandalkan data lama.
-
-Alur Kerja Investigasi:
-1.	Klien memberikan data awal (nomor, akun, foto, lokasi terakhir, kronologi, dll).
-2.	Tim digital menganalisis data untuk mencari jejak terbaru, identitas, dan pola pergerakan.
-3.	Hasil analisis dikirim ke orang lapangan sebagai petunjuk arah.
-4.	Orang lapangan melakukan pengecekan langsung di lokasi.
-5.	Temuan dari lapangan dikirim kembali ke tim digital.
-6.	Data diperdalam kembali hingga mencapai titik informasi yang paling akurat.
-Proses ini dilakukan berulang dan saling melengkapi sampai data benar-benar kuat.
-
-Hasil yang Diberikan:
-•	Identitas pihak terkait
-•	Lokasi dan pergerakan yang relevan
-•	Pola aktivitas terbaru
-•	Laporan hasil investigasi berbasis data digital dan lapangan
-
-Catatan Tambahan:
-•	Fokus utama adalah data baru dan pergerakan terkini
-•	Data lama hanya digunakan sebagai pembanding, bukan acuan utama
-•	Tanpa orang lapangan, hasil tidak akan maksimal
+Hasil:
+• Identitas
+• Lokasi & pergerakan
+• Pola aktivitas
+• Laporan investigasi
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="layanan8" class="content">
-<h2>8. Takedown Akun (Nonaktif Permanen)</h2>
+<div id="l8" class="content">
+<h2>8. Takedown Akun</h2>
+<textarea readonly>
 Instagram / Twitter / X:
 • Rp3.000.000
 • DP Rp1.000.000
 • Gagal → DP kembali Rp500.000
-(sebagian dipakai untuk biaya proses dan tools)
 
 TikTok:
 • Rp4.000.000
 • DP Rp1.500.000
 • Gagal → DP kembali Rp750.000
-(sebagian dipakai untuk biaya proses dan tools)
 
 Catatan:
 • Tidak instan
 • Pelunasan jika berhasil
-
-Hasil:
-Akun benar-benar tidak bisa digunakan lagi (nonaktif permanen).
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
 </div>
 
-<div id="pembayaran" class="content">
+<div id="pay" class="content">
 <h2>Sistem Pembayaran</h2>
-• Skema pembayaran mengikuti masing-masing layanan
+<textarea readonly>
 • Cek awal: bayar cek → lanjut jika data ada
-• DP 25%: untuk layanan analisis & recovery
-• Bayar jika berhasil: investigasi data tertentu
-• Investigasi kasus: Rp2.500.000 buka berkas + Rp2.000.000 fee sukses
-• Takedown akun: DP di awal, pelunasan jika berhasil, gagal DP kembali sebagian
+• DP 25% untuk layanan analisis & recovery
+• Investigasi kasus: Rp2.500.000 + Rp2.000.000 fee sukses
+• Takedown akun: DP di awal, pelunasan jika berhasil
 
-PERSETUJUAN
-Dengan melakukan pembayaran, klien dianggap setuju dengan seluruh ketentuan layanan.
-Tidak ada pembatalan (cancel) setelah proses dimulai.
+Dengan pembayaran, klien dianggap setuju dengan seluruh ketentuan layanan.
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
 
 </div>
+
+<footer>© 2026 — Layanan Investigasi & Pelacakan Data</footer>
+
+<script>
+function show(id){
+    document.querySelectorAll('.content').forEach(c=>c.style.display='none');
+    document.getElementById(id).style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyText(btn){
+    const area=btn.previousElementSibling;
+    area.select();
+    document.execCommand("copy");
+    btn.nextElementSibling.innerText="✅ Berhasil di-copy";
+}
+</script>
+
 
 
 <div class="legal-center">
@@ -434,3 +436,4 @@ function showContent(id) {
 
 </body>
 </html>
+
