@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COPY DM & MENU LAYANAN</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f1115;
+    color:#e0e0e0;
+}
+
+header{
+    background:#151922;
+    padding:25px;
+    text-align:center;
+    border-bottom:1px solid #2a2f3a;
+}
+
+header h1{
+    margin:0;
+    color:#00e0ff;
+    font-size:22px;
+}
+
+header p{
+    margin-top:8px;
+    font-size:13px;
+    color:#a0a8b3;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.box{
+    background:#151922;
+    border:1px solid #2a2f3a;
+    padding:20px;
+    border-radius:6px;
+    margin-bottom:20px;
+}
+
+.box h2{
+    margin-top:0;
+    color:#00e0ff;
+}
+
+textarea{
+    width:100%;
+    height:260px;
+    background:#0f1115;
+    color:#e0e0e0;
+    border:1px solid #2a2f3a;
+    padding:14px;
+    border-radius:6px;
+    resize:none;
+    font-size:13px;
+    line-height:1.5;
+}
+
+button{
+    margin-top:15px;
+    background:#00e0ff;
+    color:#000;
+    border:none;
+    padding:12px 20px;
+    font-size:14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.85;
+}
+
+.status{
+    margin-top:8px;
+    font-size:12px;
+    color:#7fffd4;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>COPY PESAN DM INSTAGRAM</h1>
+    <p>Balasan cepat • Sekali klik • Aman karakter</p>
+</header>
+
+<div class="container">
+
+<!-- MENU LAYANAN -->
+<div class="box">
+<h2>📌 MENU LAYANAN</h2>
+<textarea id="menuText" readonly>
+📌 MENU LAYANAN
+
+1️⃣ Lacak HP Hilang (IMEI)
+Pelacakan HP berdasarkan IMEI (lokasi & identitas jika tersedia)
+
+2️⃣ Cek Lokasi Nomor HP
+Penelusuran global nomor HP + identifikasi data jaringan
+
+3️⃣ Cek Data Akun Media Sosial
+Analisis jejak digital & identifikasi pemilik akun
+
+4️⃣ Lacak Lokasi Akun Media Sosial
+Perkiraan wilayah/kota login terakhir akun
+
+5️⃣ Recovery Akun Media Sosial
+Pemulihan akun yang diretas / diambil alih
+
+6️⃣ Investigasi Data
+Penelusuran identitas dari nomor / foto / rekening
+
+7️⃣ Investigasi Kasus
+Penanganan kasus berbasis data digital & lapangan
+
+8️⃣ Takedown Akun
+Nonaktif permanen akun media sosial
+
+9️⃣ Sistem Pembayaran & Ketentuan
+Skema DP, cek awal, refund, dan persetujuan layanan
+</textarea>
+<button onclick="copyMenu()">Copy Menu</button>
+<div id="statusMenu" class="status"></div>
+</div>
+
+<!-- DM FAKE ACC -->
+<div class="box">
+<h2>📩 PESAN DM – CEK AKUN MEDSOS</h2>
+<textarea id="dmFake" readonly>
+Layanan Analisis & Lacak Akun Media Sosial
+
+🔍 Cek Data Akun
+• Akun biasa: Rp1.500.000 (DP 25%)
+• Fake/minim jejak: Rp3.500.000 (DP 25%)
+• Fake TikTok: Rp5.000.000 (DP 25%)
+
+Analisis berbasis jejak digital nyata, bukan tebakan.
+Akun asli → peluang identitas lebih besar.
+Akun palsu → hasil tergantung jejak data.
+
+Hasil (jika ada):
+Username & ID, email/HP terhubung, wilayah & waktu akses, aktivitas akun, identitas pemilik.
+
+DP di awal, pelunasan jika data ditemukan.
+Jika tidak ada data sama sekali → DP refund 100%.
+
+📍 Lacak Lokasi Akun – Rp700.000
+Mengetahui dari kota/wilayah mana akun terakhir diakses.
+</textarea>
+<button onclick="copyFake()">Copy Pesan DM</button>
+<div id="statusFake" class="status"></div>
+</div>
+
+<!-- DM PELACAKAN NOMOR -->
+<div class="box">
+<h2>📞 PESAN DM – PELACAKAN NOMOR HP</h2>
+<textarea id="dmNomor" readonly>
+Bisa kak. Kami menyediakan pelacakan & pendalaman nomor HP.
+
+🔍 Hasil bisa meliputi:
+• Lokasi nomor (real-time / terakhir aktif)
+• Identitas pemilik
+• Status & aktivitas
+• Data keluarga & kontak terkait
+• Foto (jika tersedia)
+• Jejak digital
+
+💰 Harga layanan:
+• Pendalaman lengkap (alamat & identitas): Rp500.000
+• Identitas nomor saja: Rp300.000
+• Lacak lokasi nomor: Rp200.000
+
+Hasil tergantung kekuatan data nomor.
+Cek awal dilakukan sebelum proses lanjut.
+</textarea>
+<button onclick="copyNomor()">Copy Pesan Nomor</button>
+<div id="statusNomor" class="status"></div>
+</div>
+
+</div>
+
+<script>
+function copyMenu(){
+    const t=document.getElementById("menuText");
+    t.select(); document.execCommand("copy");
+    document.getElementById("statusMenu").innerText="✅ Menu berhasil di-copy";
+}
+function copyFake(){
+    const t=document.getElementById("dmFake");
+    t.select(); document.execCommand("copy");
+    document.getElementById("statusFake").innerText="✅ Pesan DM berhasil di-copy";
+}
+function copyNomor(){
+    const t=document.getElementById("dmNomor");
+    t.select(); document.execCommand("copy");
+    document.getElementById("statusNomor").innerText="✅ Pesan nomor berhasil di-copy";
+}
+</script>
+
+</body>
+</html>
