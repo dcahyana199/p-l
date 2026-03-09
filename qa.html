@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COPY DM & MENU LAYANAN</title>
+<title>MENU LAYANAN INVESTIGASI DIGITAL</title>
 
 <style>
 body{
@@ -53,7 +53,7 @@ header p{
 
 textarea{
     width:100%;
-    height:260px;
+    height:420px;
     background:#0f1115;
     color:#e0e0e0;
     border:1px solid #2a2f3a;
@@ -90,16 +90,134 @@ button:hover{
 <body>
 
 <header>
-    <h1>COPY PESAN DM INSTAGRAM</h1>
-    <p>Balasan cepat • Sekali klik • Aman karakter</p>
+<h1>MENU LAYANAN INVESTIGASI DIGITAL</h1>
+<p>Copy cepat • Sekali klik • Format aman</p>
 </header>
 
 <div class="container">
 
-<!-- MENU LAYANAN -->
+<!-- MENU LAYANAN INVESTIGASI -->
+<div class="box">
+<h2>📌 MENU LAYANAN INVESTIGASI DIGITAL</h2>
+
+<textarea id="menuInvestigasi" readonly>
+📌 MENU LAYANAN INVESTIGASI DIGITAL
+1️⃣ Lacak HP Hilang (IMEI)
+Pelacakan perangkat HP yang hilang menggunakan nomor IMEI.
+Layanan meliputi:
+• Trace IMEI semua provider
+• Perkiraan lokasi perangkat
+• Identifikasi jaringan jika tersedia
+• Analisa aktivitas perangkat
+
+2️⃣ Cek Lokasi Nomor HP
+Penelusuran nomor telepon untuk mengetahui data jaringan dan wilayah penggunaan.
+Layanan meliputi:
+• Cek operator / provider
+• Analisis jaringan nomor
+• Perkiraan lokasi wilayah
+• Data aktivitas dasar nomor
+
+3️⃣ Cek Data Akun Media Sosial
+Analisis jejak digital akun media sosial untuk mengidentifikasi kemungkinan pemilik akun.
+Metode analisis:
+• Digital footprint tracking
+• OSINT (Open Source Intelligence)
+• Korelasi data multi-sumber
+• Verifikasi identitas akun
+
+4️⃣ Analisis Lokasi Aktivitas Akun
+Perkiraan wilayah aktivitas atau login akun media sosial berdasarkan analisis data digital.
+Digunakan untuk:
+• investigasi akun anonim
+• penelusuran aktivitas digital
+• analisa pola penggunaan akun
+
+5️⃣ Recovery Akun Media Sosial
+Bantuan pemulihan akun media sosial yang:
+• diretas
+• diambil alih
+• terkunci
+Proses dilakukan melalui analisis keamanan akun dan prosedur pemulihan platform.
+
+6️⃣ Investigasi Data Target
+Penelusuran identitas seseorang berdasarkan data awal seperti:
+• nomor HP
+• foto
+• username
+• rekening bank
+• email
+Metode yang digunakan:
+• OSINT
+• analisa data mendalam
+• korelasi database publik
+
+7️⃣ Investigasi Kasus
+Layanan investigasi digital untuk membantu penanganan kasus tertentu.
+Contoh kasus:
+• penipuan online
+• pencarian identitas anonim
+• penelusuran pelaku
+Metode investigasi:
+• profiling target
+• analisa hubungan & relasi
+• pemetaan jaringan digital
+
+8️⃣ Takedown Akun Media Sosial
+Pengajuan penonaktifan akun yang melanggar kebijakan platform seperti:
+• penipuan
+• impersonasi
+• penyalahgunaan identitas
+Proses melalui mekanisme laporan resmi platform.
+
+9️⃣ Investigasi & Analisa Data Mendalam
+Analisis data lanjutan menggunakan metode investigasi digital profesional:
+• Analisa hubungan & relasi target
+• Social Network Analysis (SNA)
+• Pemetaan jaringan komunikasi
+• Analisa pola komunikasi
+• Monitoring aktivitas digital
+• Risk & Threat Assessment
+Tools analisis termasuk metode seperti:
+• pemetaan jaringan investigasi
+• analisa hubungan data digital
+
+🔟 Laporan Investigasi Profesional
+Setiap investigasi akan disertai laporan lengkap dalam format PDF yang berisi:
+• ringkasan kasus
+• data yang ditemukan
+• analisa hubungan
+• visualisasi jaringan (jika ada)
+• kesimpulan investigasi
+
+🔍 Metode Investigasi yang Digunakan
+Beberapa metode analisis yang digunakan dalam investigasi:
+• OSINT (Open Source Intelligence)
+• Digital footprint tracking
+• Analisa hubungan target
+• Korelasi data multi-sumber
+• Monitoring aktivitas digital
+• Verifikasi data & validasi identitas
+• Social network analysis (SNA)
+
+💳 Sistem Pembayaran & Ketentuan
+• DP dibayarkan di awal sesuai paket layanan
+• Proses investigasi dimulai setelah konfirmasi pembayaran
+• Pelunasan dilakukan hanya jika data atau hasil ditemukan
+• Jika tidak ditemukan data sama sekali → DP 100% dikembalikan
+• Semua layanan dilakukan setelah persetujuan dari klien
+</textarea>
+
+<button onclick="copyText('menuInvestigasi','statusMenu1')">Copy Menu</button>
+<div id="statusMenu1" class="status"></div>
+</div>
+
+
+<!-- MENU LAYANAN DM -->
 <div class="box">
 <h2>📌 MENU LAYANAN</h2>
-<textarea id="menuText" readonly>
+
+<textarea id="menuDM" readonly>
 📌 MENU LAYANAN
 
 1️⃣ Lacak HP Hilang (IMEI)
@@ -136,14 +254,18 @@ Skema DP, cek awal, refund, dan persetujuan layanan
 • DP dibayarkan di awal sesuai paket yang dipilih
 • Pelunasan dilakukan hanya jika data/hasil ditemukan
 • Jika tidak ada data sama sekali → DP 100% dikembalikan
-• Semua layanan dilakukan setelah persetujuan dan konfirmasi dari klien</textarea>
-<button onclick="copyMenu()">Copy Menu</button>
-<div id="statusMenu" class="status"></div>
+• Semua layanan dilakukan setelah persetujuan dan konfirmasi dari klien
+</textarea>
+
+<button onclick="copyText('menuDM','statusMenu2')">Copy Menu</button>
+<div id="statusMenu2" class="status"></div>
 </div>
 
-<!-- DM FAKE ACC -->
+
+<!-- DM CEK AKUN -->
 <div class="box">
 <h2>📩 PESAN DM – CEK AKUN MEDSOS</h2>
+
 <textarea id="dmFake" readonly>
 Layanan Analisis & Lacak Akun Media Sosial
 
@@ -165,13 +287,16 @@ Jika tidak ada data sama sekali → DP refund 100%.
 📍 Lacak Lokasi Akun – Rp700.000
 Mengetahui dari kota/wilayah mana akun terakhir diakses.
 </textarea>
-<button onclick="copyFake()">Copy Pesan DM</button>
+
+<button onclick="copyText('dmFake','statusFake')">Copy Pesan DM</button>
 <div id="statusFake" class="status"></div>
 </div>
 
-<!-- DM PELACAKAN NOMOR -->
+
+<!-- DM NOMOR -->
 <div class="box">
 <h2>📞 PESAN DM – PELACAKAN NOMOR HP</h2>
+
 <textarea id="dmNomor" readonly>
 Kami menyediakan pelacakan & pendalaman nomor HP.
     dan PELACAKAN REKENING DAN FOTO UNTUK LAYANAN INI
@@ -192,33 +317,22 @@ Kami menyediakan pelacakan & pendalaman nomor HP.
 Hasil tergantung kekuatan data nomor.
 Cek awal dilakukan sebelum proses lanjut.
 </textarea>
-<button onclick="copyNomor()">Copy Pesan Nomor</button>
+
+<button onclick="copyText('dmNomor','statusNomor')">Copy Pesan Nomor</button>
 <div id="statusNomor" class="status"></div>
 </div>
 
 </div>
 
 <script>
-function copyMenu(){
-    const t=document.getElementById("menuText");
-    t.select(); document.execCommand("copy");
-    document.getElementById("statusMenu").innerText="✅ Menu berhasil di-copy";
-}
-function copyFake(){
-    const t=document.getElementById("dmFake");
-    t.select(); document.execCommand("copy");
-    document.getElementById("statusFake").innerText="✅ Pesan DM berhasil di-copy";
-}
-function copyNomor(){
-    const t=document.getElementById("dmNomor");
-    t.select(); document.execCommand("copy");
-    document.getElementById("statusNomor").innerText="✅ Pesan nomor berhasil di-copy";
+function copyText(textId,statusId){
+    const text=document.getElementById(textId);
+    text.select();
+    text.setSelectionRange(0,99999);
+    document.execCommand("copy");
+    document.getElementById(statusId).innerText="✅ Teks berhasil di-copy";
 }
 </script>
 
 </body>
 </html>
-
-
-
-
