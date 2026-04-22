@@ -1,371 +1,541 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layanan Investigasi & Pelacakan Data 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layanan Investigasi & Pelacakan Data 2026</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f1115;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-        header {
-            background: #151922;
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 2px solid #00e0ff;
-        }
-        header h1 {
-            margin: 0;
-            color: #00e0ff;
-            font-size: 22px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        header p {
-            margin-top: 8px;
-            color: #a0a8b3;
-            font-size: 13px;
-        }
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
-        }
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        .menu button {
-            background: #1c2230;
-            color: #fff;
-            border: 1px solid #2f3747;
-            padding: 12px 10px;
-            cursor: pointer;
-            font-size: 13px;
-            border-radius: 6px;
-            transition: 0.3s;
-            text-align: left;
-        }
-        .menu button:hover {
-            background: #00e0ff;
-            color: #000;
-            border-color: #00e0ff;
-        }
-        .menu button:focus {
-            background: #00e0ff;
-            color: #000;
-            outline: none;
-        }
-        .content {
-            display: none;
-            background: #151922;
-            border: 1px solid #2a2f3a;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            animation: fadeIn 0.4s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .content h2 {
-            color: #00e0ff;
-            margin-top: 0;
-            font-size: 18px;
-            border-left: 4px solid #00e0ff;
-            padding-left: 10px;
-        }
-        textarea {
-            width: 100%;
-            min-height: 350px;
-            background: #0a0c10;
-            color: #d1d1d1;
-            border: 1px solid #2f3747;
-            border-radius: 6px;
-            padding: 15px;
-            font-size: 13px;
-            line-height: 1.6;
-            resize: vertical;
-            box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .copy-btn {
-            margin-top: 12px;
-            background: #00e0ff;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            font-size: 13px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .copy-btn:active { transform: scale(0.98); }
-        .copy-status {
-            margin-top: 8px;
-            font-size: 12px;
-            color: #7fffd4;
-            height: 15px;
-        }
-        .legal-center {
-            background: #151922;
-            padding: 30px 20px;
-            border-top: 1px solid #2a2f3a;
-            margin-top: 40px;
-            text-align: center;
-        }
-        .legal-center h2 {
-            font-size: 16px;
-            color: #ff4d4d; /* Warna merah untuk peringatan */
-            margin-bottom: 15px;
-        }
-        .legal-center p {
-            font-size: 12px;
-            color: #a0a8b3;
-            max-width: 800px;
-            margin: 5px auto;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 11px;
-            color: #555;
-            background: #0a0c10;
-        }
-    </style>
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f1115;
+    color:#e0e0e0;
+    line-height:1.6;
+}
+header{
+    background:#151922;
+    padding:25px;
+    text-align:center;
+    border-bottom:1px solid #00e0ff; /* Pertegas border */
+}
+header h1{
+    margin:0;
+    color:#00e0ff;
+    font-size:24px;
+}
+header p{
+    margin-top:8px;
+    color:#a0a8b3;
+    font-size:14px;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:12px;
+    margin-bottom:25px;
+}
+.menu button{
+    background:#1c2230;
+    color:#fff;
+    border:1px solid #2f3747;
+    padding:15px;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+    transition: 0.3s;
+}
+.menu button:hover{
+    background:#00e0ff;
+    color:#000;
+}
+.content{
+    display:none;
+    background:#151922;
+    border:1px solid #2a2f3a;
+    padding:20px;
+    border-radius:6px;
+    margin-bottom:20px;
+    /* Efek muncul halus */
+    animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.content h2{
+    color:#00e0ff;
+    margin-top:0;
+}
+textarea{
+    width:100%;
+    min-height:320px;
+    background:#0f1115;
+    color:#e0e0e0;
+    border:1px solid #2f3747;
+    border-radius:6px;
+    padding:14px;
+    font-size:13px;
+    line-height:1.55;
+    resize:vertical;
+    box-sizing: border-box; /* Agar padding tidak merusak lebar */
+}
+.copy-btn{
+    margin-top:10px;
+    background:#00e0ff;
+    color:#000;
+    border:none;
+    padding:10px 16px;
+    font-size:13px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.copy-status{
+    margin-top:6px;
+    font-size:12px;
+    color:#7fffd4;
+    height: 18px; /* Booking space agar layout tidak lompat */
+}
+footer{
+    text-align:center;
+    padding:20px;
+    font-size:12px;
+    color:#777;
+    border-top:1px solid #2a2f3a;
+}
+.legal-center {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #cfd3da;
+    background: #151922;
+    border-top: 1px solid #2a2f3a;
+    margin-top: 20px;
+}
+.legal-center h2 {
+    font-size: 15px;
+    margin: 14px 0 8px;
+    color: #00e0ff;
+    font-weight: 600;
+}
+.legal-center p {
+    font-size: 12px;
+    line-height: 1.45;
+    margin: 6px 0;
+}
+.legal-strong {
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 6px;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>LAYANAN INVESTIGASI & PELACAKAN DATA (2026)</h1>
-    <p>Sistem Informasi Layanan Digital & Cyber Investigation</p>
+<h1>LAYANAN INVESTIGASI & PELACAKAN DATA (2026)</h1>
+<p>Seluruh layanan berbasis penelusuran data digital (cyber)</p>
 </header>
 
 <div class="container">
-    <div class="menu">
-        <button onclick="show('l1')">1. Lacak HP Hilang (IMEI)</button>
-        <button onclick="show('l2')">2. Cek Lokasi Nomor HP</button>
-        <button onclick="show('l3')">3. Cek Data Akun Sosmed</button>
-        <button onclick="show('l4')">4. Lacak Lokasi Sosmed</button>
-        <button onclick="show('l5')">5. Recovery Akun Sosmed</button>
-        <button onclick="show('l6')">6. Recovery Akun Google</button>
-        <button onclick="show('l7')">7. Investigasi Data</button>
-        <button onclick="show('l8')">8. Investigasi Kasus</button>
-        <button onclick="show('l9')">9. Takedown Akun</button>
-        <button onclick="show('pay')">💰 Sistem Pembayaran</button>
-    </div>
 
-    <div id="l1" class="content">
-        <h2>1. Lacak HP Hilang (Melalui IMEI)</h2>
-        <textarea readonly>Harga Layanan:
+<div class="menu">
+<button onclick="show('l1')">1. Lacak HP Hilang (IMEI)</button>
+<button onclick="show('l2')">2. Cek Lokasi Nomor HP</button>
+<button onclick="show('l3')">3. Cek Data Akun Media Sosial</button>
+<button onclick="show('l4')">4. Lacak Lokasi Akun Medsos</button>
+<button onclick="show('l5')">5. Recovery Akun Medsos</button>
+<button onclick="show('l6')">6. Recovery Akun Google</button>
+<button onclick="show('l7')">7. Investigasi Data</button>
+<button onclick="show('l8')">8. Investigasi Kasus</button>
+<button onclick="show('l9')">9. Takedown Akun</button>
+<button onclick="show('pay')">Sistem Pembayaran</button>
+</div>
+
+<div id="l1" class="content">
+<h2>1. Lacak HP Hilang (Melalui IMEI)</h2>
+<textarea readonly>Harga Layanan:
 • Cek lokasi HP saja: Rp300.000
 • Cek lokasi + identitas pengguna: Rp500.000
 
-Cara Kerja:
-IMEI HP dicek untuk melihat status aktif di jaringan operator.
+Cara Kerja (Singkat):
+IMEI HP dicek untuk melihat apakah HP masih aktif dan terhubung ke jaringan operator.
 
-Hasil:
-• Perkiraan lokasi HP (Radius BTS)
-• Titik Google Maps
-• Info provider seluler
+Hasil yang Didapat:
+• Perkiraan lokasi HP (bukan titik GPS tepat)
+• Titik lokasi di Google Maps
+• Informasi jaringan operator
 • Data pemilik nomor (jika tersedia)
 
-Penting:
-• Akurasi ±500 meter (Sinyal BTS).
-• Biaya cek awal Rp50.000 (Jika data tidak ada, proses stop).</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+Penting untuk Dipahami:
+• Lokasi adalah perkiraan sinyal BTS, bukan lokasi akurat
+• Perkiraan jarak ±500 meter
+• Jika HP masih memakai nomor lama, maka nomor lama yang terdeteksi
+• Jika nomor sudah diganti, yang terbaca adalah nomor baru
+• Kepemilikan nomor baru bisa ditelusuri lebih lanjut jika datanya tersedia
 
-    <div id="l2" class="content">
-        <h2>2. Cek Lokasi Posisi Nomor HP</h2>
-        <textarea readonly>Harga: Rp200.000/sekali cek
+Cek Awal:
+• Biaya cek IMEI awal: Rp50.000
+• Jika ada data → lanjut
+• Jika tidak ada data → proses berhenti
+
+Note: IMEI dikirim via teks, bukan foto.</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
+
+<div id="l2" class="content">
+<h2>2. Cek Lokasi Posisi Nomor HP</h2>
+<textarea readonly>Harga Layanan:
+• Rp200.000/sekali cek
 
 Cara Kerja:
-Mendeteksi area keberadaan nomor berdasarkan koneksi BTS terakhir.
+Nomor HP dicek untuk mengetahui perkiraan lokasi terakhir atau saat ini ketika nomor tersebut terhubung ke jaringan operator (BTS).
+Layanan ini bukan share location / GPS real-time, bisa bergeser beberapa meter dan clue daerah sekitar yang memudahkan pencarian lokasi sekitar
 
 Hasil:
-• Titik koordinat Latitude & Longitude
-• Link Google Maps
-• Info Menara BTS (LAC/CI)
+• Perkiraan lokasi terakhir nomor terdeteksi
+• Titik lokasi di Google Maps sebagai patokan awal
+• Koordinat latitude & longitude
+• Informasi BTS (LAC / CI)
+• Waktu & usia data
+• Analiraan area lokasi dan clue daerah yang memudahkan pencarian
 
-Catatan:
-Bukan GPS real-time 1 meter, melainkan area radius BTS. Klien perlu menyisir area yang diberikan.</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+Penting untuk Dipahami:
+• Lokasi yang diberikan adalah perkiraan area, 
+• Hasil tidak menunjukkan posisi persis target
+• Klien perlu melakukan penyisiran dan pengamatan di area yang kami berikan
 
-    <div id="l3" class="content">
-        <h2>3. Cek Data Akun Media Sosial</h2>
-        <textarea readonly>Harga:
-• Akun Biasa: Rp1.500.000 (DP 25%)
-• Fake Akun: Rp3.500.000 (DP 25%)
-• Fake Akun TikTok: Rp5.000.000 (DP 25%)
+Cek Awal:
+• Biaya cek awal: Rp50.000
+• Jika data ADA → lanjut bayar Rp150.000
+(total menjadi Rp200.000)
+• Jika data TIDAK ADA → tidak ada biaya lanjutan</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
 
-Data yang Didapat:
-• Email/No HP terhubung
-• Wilayah login
-• Jejak aktivitas digital
-• Identitas pemilik (jika menggunakan data asli)
+<div id="l3" class="content">
+<h2>3. Cek Data Akun Media Sosial</h2>
+<textarea readonly>Harga:
+• Akun biasa: Rp1.500.000 (DP 25%: Rp375.000)
+• Fake akun / minim jejak: Rp3.500.000 (DP Rp875.000)
+• Fake akun TikTok: Rp5.000.000 (DP Rp1.250.000)
 
-Sistem: DP 25% di awal. Jika data TIDAK ditemukan, DP kembali 100%.</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+Penjelasan Singkat (Wajib Dibaca):
+• Layanan ini menganalisis jejak digital akun, bukan menebak atau mengarang data.
+• Jika akun menggunakan data asli, peluang menemukan identitas lebih besar.
+• Jika akun menggunakan data palsu / samaran, hasil bisa terbatas, tergantung jejak digital yang tersedia.
 
-    <div id="l4" class="content">
-        <h2>4. Lacak Lokasi Akun Media Sosial</h2>
-        <textarea readonly>Harga: Rp700.000
+FAQ Singkat – Bisa Ketahuan atau Tidak?
+• Apakah identitas akun pasti ketahuan?
+❌ Tidak selalu. Tergantung seberapa kuat jejak digital akun tersebut.
 
-Fungsi:
-Mengetahui kota/wilayah tempat akun terakhir kali diakses.
+• Kalau akun pakai data palsu?
+Masih bisa dianalisis, namun tidak menjamin nama asli langsung ditemukan.
+
+• Data apa yang biasanya bisa didapat dari akun palsu?
+Username, ID akun, pola aktivitas, wilayah login, serta keterkaitan akun lain (jika ada).
+
+• Kenapa akun palsu lebih mahal?
+Karena proses analisis lebih sulit dan jejak data lebih minim.
+
+Hasil yang Diberikan:
+• Username & ID akun
+• Email / nomor HP (jika terhubung dan terdeteksi)
+• Wilayah & waktu akses
+• Jejak aktivitas akun
+• Identitas pemilik (jika data pendukung tersedia)
+
+SISTEM PEMBAYARAN
+• DP 25% dibayarkan di awal sesuai paket yang dipilih
+• Pelunasan dibayarkan jika data ditemukan
+• Jika tidak ada data sama sekali yang didapatkan,
+➜ uang dikembalikan 100% utuh (DP full refund)</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
+
+<div id="l4" class="content">
+<h2>4. Lacak Lokasi Akun Media Sosial</h2>
+<textarea readonly>Harga:
+• Rp700.000
+
+Penjelasan Singkat (Wajib Dipahami):
+Layanan ini digunakan untuk mengetahui perkiraan lokasi saat akun terakhir login, berdasarkan jejak akses akun.
+Bukan share location dan bukan titik GPS real-time.
 
 Hasil:
-• Nama Kota/Wilayah
-• Estimasi Radius
-• Timestamp (Waktu login terakhir)
+• Lokasi login terakhir
+• Wilayah/kota
+• Estimasi radius
+• Waktu login
 
-Cocok untuk validasi apakah target benar berada di kota tertentu.</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+Penting untuk Dipahami:
+• Lokasi yang diberikan adalah perkiraan area, bukan alamat atau titik tepat
+• Akurasi tergantung pada:
+• Aktivitas akun
+• Data login yang tersedia
+• Sistem keamanan platform
+• Hasil tidak menunjukkan posisi akun saat ini secara real-time
+• Digunakan sebagai petunjuk awal, bukan pelacakan langsung
 
-    <div id="l5" class="content">
-        <h2>5. Recovery Akun Media Sosial</h2>
-        <textarea readonly>Digital Forensic Recovery
-Rate per 1.000 Followers
+Cocok Digunakan Untuk:
+• Mengetahui akun diakses dari kota / wilayah mana
+• Menguatkan dugaan lokasi pemilik akun
+• Pendalaman investigasi lanjutan</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
+
+<div id="l5" class="content">
+<h2>5. Recovery Akun Media Sosial</h2>
+<textarea readonly>DIGITAL FORENSIC & ACCOUNT RECOVERY
+Status: Aktif | Sistem: Forensic Tools
+
+DESKRIPSI:
+Pemulihan aset digital (hack/banned), malware cleaning, 
+OSINT tracking, & Security Hardening pasca-pulih.
+
+SKEMA BIAYA (Rate per 1.000 Followers)
 
 [ STANDARD ] - Rp1.500.000
-- Akun personal/bisnis biasa.
+- DP: 35% | Estimasi: 3–7 Hari
+- Akun personal/bisnis menengah.
 
 [ HIGH PRIORITY ] - Rp2.500.000
-- Enkripsi kompleks / Kasus berat.
+- DP: 50% | Estimasi: 3–7 Hari
+- Jalur prioritas & enkripsi kompleks.
 
-[ VIP ] - Custom Quote
-- Akun Verified (Centang Biru).
+[ ENTERPRISE / VIP ] - Custom Quote
+- DP: Custom | Prioritas Utama
+- Akun Verified/Centang Biru & Korporasi.
 
-Ketentuan: DP 35%-50%. Jika gagal, DP kembali 100%.</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+KETENTUAN LAYANAN (TOS)
+1. REFUND: Jika audit teknis gagal, DP kembali 100%.
+2. PRIVASI: Zero-Log Policy (Data dihapus permanen).
+3. HITUNGAN: Pembulatan ke atas per 1.000 followers.
+   (Contoh: 1.100 followers dihitung 2.000).
 
-    <div id="l6" class="content">
-        <h2>6. Recovery Akun Google (Gmail)</h2>
-        <textarea readonly>Biaya: Rp3.000.000 (Analisis awal)
+Konfirmasi kategori layanan untuk inisiasi audit.</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
 
-Layanan pemulihan akses Gmail yang terkunci, lupa sandi, atau terkena hack melalui prosedur keamanan Google.
+<div id="l6" class="content">
+<h2>6. Recovery Akun Google</h2>
+<textarea readonly>
+Layanan Pemulihan & Pengamanan Akun Google
 
-Catatan: Keberhasilan bergantung pada sisa data pemulihan yang masih aktif (Nomor HP lama/Email pemulihan).</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+Biaya awal: Rp3.000.000 (analisis & penanganan awal)
+Biaya lanjutan: menyesuaikan tingkat kesulitan kasus
 
-    <div id="l7" class="content">
-        <h2>7. Investigasi Data (Data Mining)</h2>
-        <textarea readonly>Input: No HP / No Rekening / Foto
+Deskripsi layanan:
+Fokus pada pendampingan pemulihan akses akun Google (Gmail) melalui jalur resmi dan prosedur keamanan akun.
 
-Hasil (Jika tersedia):
-• Identitas Nama Lengkap
-• Daftar No HP aktif lainnya
-• Foto identitas
-• Hubungan keluarga
+Proses meliputi:
+• Analisis penyebab kehilangan akses
+• Pemeriksaan metode pemulihan yang masih tersedia
+• Panduan dan pendampingan proses recovery resmi Google
+• Pengamanan akun setelah akses berhasil dipulihkan
 
-Biaya: Rp500.000
-Bayar hanya jika data ditemukan (Gratis jika nihil).</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+Catatan penting:
+• Tidak menggunakan metode ilegal atau akses tanpa izin
+• Keberhasilan tergantung data pemulihan yang masih tersedia (email pemulihan, nomor HP, dll)
+• Beberapa kasus tidak dapat dipulihkan jika data sudah tidak valid</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
+    
+<div id="l7" class="content">
+<h2>7. Investigasi Data</h2>
+<textarea readonly>🔍 Punya nomor HP, foto, atau rekening bank?
 
-    <div id="l8" class="content">
-        <h2>8. Investigasi Kasus (End-to-End)</h2>
-        <textarea readonly>Biaya Buka Berkas: Rp2.500.000
-Fee Sukses: Rp2.000.000
+Cukup salah satu sebagai petunjuk awal.
+Semakin banyak data yang diberikan, semakin cepat dan akurat proses pencarian.
 
-Prosedur:
-1. Konsultasi kelayakan kasus.
-2. Analisis jejak digital target.
-3. Pendampingan strategi lapangan (Klien menyediakan orang lapangan).
-4. Penyerahan laporan final identitas dan lokasi.
+📌 Data yang bisa dikirim:
+• Nomor HP
+• Foto
+• Rekening bank
 
-Kami tidak melakukan eksekusi hukum, hanya menyediakan data valid.</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+📊 Hasil yang bisa diperoleh (jika tersedia):
+• Identitas pemilik
+• Nomor aktif lainnya
+• Foto
+• Data keluarga
 
-    <div id="l9" class="content">
-        <h2>9. Takedown Akun (Penghapusan)</h2>
-        <textarea readonly>Instagram / X: Rp3.000.000 (DP 1jt)
-TikTok / FB: Rp4.000.000 (DP 1.5jt)
+💰 Biaya: Rp500.000
+✅ GRATIS jika data tidak ditemukan
 
-Estimasi: ± 7 Hari Kerja.
-Jika gagal: Sisa DP dikembalikan setelah dipotong biaya operasional tools.</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+✨ Keunggulan layanan:
+- Transparan: bayar hanya jika ada hasil
+- Efisien: proses lebih cepat dengan data pendukung
+- Fokus hasil, bukan janji kosong</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
 
-    <div id="pay" class="content">
-        <h2>Sistem Pembayaran</h2>
-        <textarea readonly>Metode Transaksi:
-1. Cek Awal: Bayar biaya cek untuk memastikan data ada.
-2. DP (Down Payment): Untuk layanan yang membutuhkan resource tools (25%-50%).
-3. Pelunasan: Dibayar setelah bukti data/hasil diberikan.
+<div id="l8" class="content">
+<h2>8. Investigasi Kasus</h2>
+<textarea readonly>🔎 Investigasi Kasus – Cara Kerja Lengkap
 
-Setiap pembayaran yang dilakukan berarti klien telah menyetujui Disclaimer layanan kami.</textarea>
-        <button class="copy-btn" onclick="copyText(this)">📋 Copy Teks</button>
-        <div class="copy-status"></div>
-    </div>
+1️⃣ Konsultasi Awal
+• Klien menjelaskan kasus secara singkat
+• Tim mengevaluasi kelayakan investigasi
+• Penentuan biaya buka berkas (Rp2.500.000)
+
+2️⃣ Penyerahan Data Pendukung
+• Klien menyediakan data yang dimiliki: nomor, foto, lokasi, dokumen, atau informasi lain
+• Klien wajib memiliki orang lapangan untuk mendukung investigasi
+
+3️⃣ Analisis Data Digital
+• Tim menelusuri jejak digital target
+• Mengumpulkan informasi dari media sosial, akun online, nomor HP, dan sumber lain
+• Membuat peta aktivitas digital target
+
+4️⃣ Pendampingan Lapangan
+• Tim memberikan instruksi dan arahan kepada orang lapangan klien
+• Klien melakukan pengamatan fisik berdasarkan arahan tim (tim tidak turun langsung)
+• Data lapangan dikumpulkan dan dikirim ke tim untuk dianalisis lebih lanjut
+
+5️⃣ Penyusunan Laporan
+• Menggabungkan data digital dan informasi lapangan
+• Membuat laporan lengkap:
+   • Identitas target
+   • Lokasi & pergerakan
+   • Pola aktivitas
+   • Kesimpulan investigasi
+
+6️⃣ Penyampaian Hasil & Fee Sukses
+• Laporan dikirim ke klien
+• Jika hasil sesuai → pelunasan fee sukses Rp2.000.000
+• Semua data bersifat rahasia dan hanya untuk klien
+
+⚠️ Catatan Penting:
+• Tim **tidak melakukan eksekusi lapangan** atau tindakan hukum
+• Semua tindak lanjut lapangan menjadi tanggung jawab klien
+• Proses membutuhkan kerjasama aktif antara tim dan klien
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
+
+<div id="l9" class="content">
+<h2>9. Takedown Akun</h2>
+<textarea readonly>📌 LAYANAN TAKEDOWN AKUN SOSIAL MEDIA
+
+Kami menyediakan jasa bantuan takedown akun bermasalah (penipuan, impersonasi, konten merugikan, dll).
+
+━━━━━━━━━━━━━━━━━━━
+📱 Instagram / Twitter / X
+• Harga: Rp3.000.000
+• DP: Rp1.000.000
+
+Ketentuan:
+• Jika berhasil → pelunasan Rp2.000.000
+• Jika gagal → DP kembali Rp500.000
+
+━━━━━━━━━━━━━━━━━━━
+🎵 TikTok / Facebook
+• Harga: Rp4.000.000
+• DP: Rp1.500.000
+
+Ketentuan:
+• Jika berhasil → pelunasan Rp2.500.000
+• Jika gagal → DP kembali Rp750.000
+
+━━━━━━━━━━━━━━━━━━━
+📊 PENJELASAN DP
+DP (Down Payment) tidak dibayarkan penuh di awal karena terdapat biaya operasional yang harus dikeluarkan, seperti:
+• Pembelian akses / tools khusus
+• Biaya jaringan & resource
+• Proses analisis dan validasi target
+
+Sebagian DP digunakan untuk biaya tersebut, sehingga:
+• Jika berhasil → lanjut pelunasan
+• Jika gagal → sebagian DP dipotong biaya operasional, sisanya dikembalikan
+
+━━━━━━━━━━━━━━━━━━━
+📊 CATATAN PENTING
+• Proses tidak instan (melalui beberapa tahapan)
+• Estimasi pengerjaan ± 7 hari
+• Pelunasan hanya dilakukan jika berhasil
+
+━━━━━━━━━━━━━━━━━━━
+🔒 PRIVASI AMAN & TERJAGA
+Data dan identitas klien dijamin aman.
+</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
+
+<div id="pay" class="content">
+<h2>Sistem Pembayaran</h2>
+<textarea readonly>• Cek awal: bayar cek → lanjut jika data ada
+• DP 25% untuk layanan analisis & recovery
+• Investigasi kasus: Rp2.500.000 + Rp2.000.000 fee sukses
+• Takedown akun: DP di awal, pelunasan jika berhasil
+
+Dengan pembayaran, klien dianggap setuju dengan seluruh ketentuan layanan.</textarea>
+<button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+<div class="copy-status"></div>
+</div>
+
 </div>
 
 <div class="legal-center">
-    <h2>PENTING: DISCLAIMER & PRIVASI</h2>
-    <p>Kami hanya menyediakan analisis data digital. Kami tidak berafiliasi dengan aparat penegak hukum.</p>
-    <p>Segala tindakan di lapangan dan konsekuensi hukum sepenuhnya tanggung jawab klien.</p>
-    <p>Data bersifat rahasia dan akan dihapus permanen setelah transaksi selesai (Zero-Log Policy).</p>
+<h2>DISCLAIMER & PRIVASI</h2>
+<p>Seluruh layanan hanya sebatas analisis dan penelusuran data digital (cyber) serta penyusunan dan pengiriman berkas. Kami tidak melakukan tindakan lapangan, pendampingan, pelaporan hukum, atau eksekusi apa pun.</p>
+<p>Seluruh tindak lanjut di lapangan sepenuhnya menjadi tanggung jawab klien.</p>
+<p>Data dan berkas yang diberikan bersifat rahasia, dilarang disebarluaskan, dan tidak berlaku sebagai pendukung pelaporan hukum atau proses peradilan. Data hanya diperbolehkan digunakan untuk kepentingan mediasi atau restoratif justice.</p>
+<p class="legal-strong">Dengan menerima berkas dan melakukan pembayaran, klien dianggap memahami dan menyetujui seluruh batasan layanan ini.</p>
+
+<h2>PRIVASI & KERAHASIAAN</h2>
+<p>Seluruh data dan hasil investigasi bersifat rahasia dan tidak dibagikan ke pihak mana pun.</p>
 </div>
 
-<footer>
-    © 2026 — Tim Layanan Investigasi & Pelacakan Data Digital
-</footer>
+<footer>© 2026 — Layanan Investigasi & Pelacakan Data</footer>
 
 <script>
-    function show(id) {
-        // Sembunyikan semua content
-        document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
-        // Tampilkan yang dipilih
-        const target = document.getElementById(id);
-        if (target) {
-            target.style.display = 'block';
-            // Scroll halus ke arah konten
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+function show(id){
+    // Sembunyikan semua section content
+    document.querySelectorAll('.content').forEach(c=>c.style.display='none');
+    
+    // Cari elemen berdasarkan ID
+    const target = document.getElementById(id);
+    if(target) {
+        target.style.display='block';
+        // Scroll halus ke konten yang dibuka
+        window.scrollTo({top: target.offsetTop - 20, behavior:'smooth'});
     }
+}
 
-    function copyText(btn) {
-        const area = btn.previousElementSibling;
-        area.select();
-        area.setSelectionRange(0, 99999); // Untuk mobile
+function copyText(btn){
+    const area = btn.previousElementSibling;
+    area.select();
+    area.setSelectionRange(0, 99999); // Mendukung mobile
+    
+    try {
+        document.execCommand("copy");
+        const status = btn.nextElementSibling;
+        status.innerText = "✅ Berhasil di-copy";
         
-        try {
-            document.execCommand("copy");
-            const status = btn.nextElementSibling;
-            status.innerText = "✅ Berhasil di-copy ke clipboard";
-            
-            // Hilangkan status setelah 2 detik
-            setTimeout(() => {
-                status.innerText = "";
-            }, 2000);
-        } catch (err) {
-            alert("Gagal menyalin teks.");
-        }
+        // Hilangkan pesan sukses setelah 3 detik
+        setTimeout(() => {
+            status.innerText = "";
+        }, 3000);
+    } catch (err) {
+        alert("Gagal menyalin teks");
     }
+}
 </script>
 
 </body>
