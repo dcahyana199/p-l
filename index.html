@@ -161,32 +161,29 @@ footer{
 
 <div id="l1" class="content">
 <h2>1. Lacak HP Hilang (Melalui IMEI)</h2>
-<textarea readonly>Harga Layanan:
-• Cek lokasi HP saja: Rp300.000
+<textarea readonly>📍 LAYANAN CEK LOKASI HP VIA IMEI
+Melayani pengecekan lokasi HP hilang berdasarkan nomor IMEI perangkat.
+💰 HARGA
+• Cek lokasi HP: Rp300.000 (DP proses Rp50.000, pelunasan Rp250.000 setelah hasil)
 • Cek lokasi + identitas pengguna: Rp500.000
-
-Cara Kerja (Singkat):
-IMEI HP dicek untuk melihat apakah HP masih aktif dan terhubung ke jaringan operator.
-
-Hasil yang Didapat:
-• Perkiraan lokasi HP (bukan titik GPS tepat)
-• Titik lokasi di Google Maps
-• Informasi jaringan operator
-• Data pemilik nomor (jika tersedia)
-
-Penting untuk Dipahami:
-• Lokasi adalah perkiraan sinyal BTS, bukan lokasi akurat
-• Perkiraan jarak ±500 meter
-• Jika HP masih memakai nomor lama, maka nomor lama yang terdeteksi
-• Jika nomor sudah diganti, yang terbaca adalah nomor baru
-• Kepemilikan nomor baru bisa ditelusuri lebih lanjut jika datanya tersedia
-
-Cek Awal:
-• Biaya cek IMEI awal: Rp50.000
-• Jika ada data → lanjut
-• Jika tidak ada data → proses berhenti
-
-Note: IMEI dikirim via teks, bukan foto.</textarea>
+━━━━━━━━━━━━━━━━━━━
+📊 CARA KERJA
+IMEI dicek untuk melihat apakah perangkat masih aktif di jaringan operator.
+Jika perangkat masih aktif, data yang bisa terbaca:
+• Perkiraan lokasi HP
+• Titik lokasi Google Maps
+• Operator / jaringan
+• Nomor aktif di perangkat (jika tersedia)
+• Identitas pengguna nomor (jika tersedia)
+━━━━━━━━━━━━━━━━━━━
+📌 PENTING
+• Lokasi berupa perkiraan sinyal BTS, bukan GPS akurat
+• Estimasi radius sekitar ±500 meter
+• Jika nomor di HP sudah diganti, maka yang terbaca adalah nomor baru
+• Jika HP sudah ganti nomor / reset di Grapari, kemungkinan lokasi akan mengarah ke nomor baru
+• Dengan menjawab “proses”, maka dianggap setuju untuk melakukan pembayaran apabila hasil lokasi berhasil ditemukan
+    note: kirim text imei jangan foto
+</textarea>
 <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
 <div class="copy-status"></div>
 </div>
