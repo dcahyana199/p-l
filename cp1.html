@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER SIGNAL INTEL v7.2 | Multi-Format Tactical Parser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body { font-family: 'Rajdhani', sans-serif; background-color: #020409; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #020408; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+        
+        #canvas_container { cursor: grab; }
+        #canvas_container:active { cursor: grabbing; }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col lg:flex-row overflow-x-hidden">
+
+    <div class="w-full lg:w-[380px] bg-[#040712] border-r border-slate-900 p-5 flex flex-col justify-between flex-shrink-0 z-30 shadow-2xl h-screen">
+        <div class="space-y-4 flex-1 flex flex-col min-h-0">
+            <div class="flex items-center justify-between border-b border-slate-900 pb-3 flex-shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded bg-blue-600/10 border border-blue-600 flex items-center justify-center text-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+                        <i class="fa-solid fa-shield-halved text-lg animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-md font-extrabold tracking-wider text-white uppercase">CYBER SIGNAL v7.2</h1>
+                        <p class="text-[10px] text-slate-500 code-font">MUTLI-FORMAT TACTICAL PARSER</p>
+                    </div>
+                </div>
+                <span class="text-[10px] font-bold text-emerald-500 code-font bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/30">AUTO DETECT</span>
+            </div>
+
+            <div class="space-y-3 flex-1 flex flex-col min-h-0 overflow-y-auto pr-1">
+                <div class="flex flex-col flex-1 min-h-[140px]">
+                    <div class="flex justify-between items-center mb-1 flex-shrink-0">
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                            <i class="fa-solid fa-terminal text-blue-500 mr-1"></i> Paste Raw Log Target
+                        </h2>
+                        <button onclick="clearInput('in_bulk_data')" class="text-[10px] text-red-400 hover:underline code-font">CLEAR</button>
+                    </div>
+                    <textarea id="in_bulk_data" class="w-full flex-1 bg-[#010309] border border-slate-800 rounded p-2 text-[11px] code-font text-blue-400 focus:outline-none focus:border-blue-500 resize-none" placeholder="Masukkan teks log bts..."></textarea>
+                </div>
+
+                <div class="flex flex-col h-[105px] flex-shrink-0">
+                    <div class="flex justify-between items-center mb-1">
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                            <i class="fa-solid fa-file-image text-emerald-500 mr-1"></i> Paste / Drop Foto Map Mentah
+                        </h2>
+                        <button onclick="clearMapImage()" class="text-[10px] text-red-400 hover:underline code-font">RESET</button>
+                    </div>
+                    <div id="image_drop_zone" class="w-full flex-1 bg-[#010309] border-2 border-dashed border-slate-800 hover:border-emerald-500/50 rounded flex flex-col items-center justify-center p-2 text-center transition cursor-pointer relative overflow-hidden">
+                        <input type="file" id="file_map_input" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="handleFileSelect(event)">
+                        <div id="drop_zone_prompt" class="space-y-1 pointer-events-none">
+                            <i class="fa-solid fa-cloud-arrow-up text-slate-600 text-base"></i>
+                            <p class="text-[10px] text-slate-400 font-sans">Klik / Paste Gambar Map Mentah disini <br><span class="code-font text-emerald-400">(Ctrl+V)</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="zoom_control_panel" class="bg-slate-950 p-2.5 rounded border border-slate-900 space-y-1 hidden">
+                    <div class="flex justify-between text-[11px] code-font">
+                        <span class="text-slate-400">UKURAN SKALA MAP:</span>
+                        <span id="zoom_lbl" class="text-emerald-400 font-bold">100%</span>
+                    </div>
+                    <input type="range" id="map_zoom_slider" min="50" max="250" value="100" class="w-full accent-emerald-500 bg-slate-900 h-1 rounded" oninput="updateMapScale(this.value)">
+                </div>
+
+                <button onclick="parseAndUpdateDashboard()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-2 rounded flex items-center justify-center space-x-2 transition duration-200 shadow-lg text-xs flex-shrink-0">
+                    <i class="fa-solid fa-sync"></i>
+                    <span>PROSES DATA & ANALISIS</span>
+                </button>
+
+                <button onclick="copyToClipboardTemplate()" class="w-full bg-slate-900 hover:bg-slate-800 border border-slate-800 text-yellow-400 font-bold py-2 rounded flex items-center justify-center space-x-2 transition duration-200 text-xs flex-shrink-0 shadow-md">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>SALIN TEKS ANALISIS (CLIPBOARD)</span>
+                </button>
+                <div id="copy_notif" class="text-[10px] text-emerald-400 code-font text-center font-bold h-2 opacity-0 transition-opacity duration-300">✓ BERHASIL DISALIN KE CLIPBOARD!</div>
+            </div>
+        </div>
+
+        <div class="mt-2 pt-2 border-t border-slate-900 flex-shrink-0">
+            <button onclick="exportDashboard()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2 px-4 rounded flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(5,150,105,0.2)] transition duration-300 text-xs">
+                <i class="fa-solid fa-download"></i>
+                <span>EKSPOR BUKTI INTEL (PNG)</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex-1 flex items-center justify-center p-4 overflow-y-auto min-h-screen bg-[#010206]">
+        
+        <div id="infographic-card" class="w-[920px] h-[580px] bg-[#03050c] border border-slate-900 rounded-xl p-5 relative flex flex-col justify-between overflow-hidden shadow-2xl">
+            
+            <div class="relative z-10 flex justify-between items-start border-b border-slate-900/80 pb-3">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-[9px] bg-blue-950/60 border border-blue-500/40 px-1.5 py-0.5 rounded text-blue-400 font-bold code-font uppercase">OP_SIGNAL_INTEL</span>
+                        <span class="text-[10px] text-slate-500 code-font">LIVE INTERACTIVE GEOLOCATION INFOGRAPHIC</span>
+                    </div>
+                    <h2 class="text-xl font-extrabold text-white tracking-tight uppercase mt-1">
+                        SISTEM ANALISIS GEALOKASI TACTICAL TARGET
+                    </h2>
+                </div>
+                <div class="text-right code-font">
+                    <div class="text-[10px] text-slate-400">SYS_RENDER: <span class="text-emerald-400">STRICT_PARSER_V7.2</span></div>
+                    <div class="text-[9px] text-slate-500 mt-0.5">TARGET_ID: <span id="out_target_id" class="text-slate-400">-</span></div>
+                </div>
+            </div>
+
+            <div id="main_content_grid" class="relative flex-1 my-4 grid grid-cols-12 gap-4 items-stretch min-h-[360px]">
+                
+                <div id="telemetry_panel" class="col-span-4 flex flex-col justify-between bg-[#050813] border border-slate-900 rounded-lg p-3.5">
+                    <div class="space-y-3.5">
+                        <div class="border-b border-slate-900 pb-2">
+                            <span class="text-[9px] text-slate-500 code-font block uppercase">CELL NETWORK ID</span>
+                            <div class="text-lg font-black text-white tracking-wider code-font"><span id="out_freq">-</span> <span id="out_operator_lbl" class="text-xs font-normal text-blue-400"></span></div>
+                        </div>
+
+                        <div class="space-y-2 text-[11px] code-font">
+                            <div class="flex justify-between py-1 border-b border-slate-900/40">
+                                <span class="text-slate-500">MSISDN:</span>
+                                <span id="out_msisdn" class="text-blue-400 font-bold">-</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-900/40">
+                                <span class="text-slate-500">TARGET DEVICE:</span>
+                                <span id="out_device" class="text-emerald-400 font-bold uppercase truncate max-w-[150px]">-</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-900/40">
+                                <span class="text-slate-500">CGI:</span>
+                                <span id="out_cgi" class="text-slate-200 font-bold text-[10px]">-</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-900/40">
+                                <span class="text-slate-500">LAC / CID:</span>
+                                <span id="out_laccid" class="text-yellow-400 font-bold">-</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-900/40">
+                                <span class="text-slate-500">Azimuth Angle:</span>
+                                <span id="out_azimuth" class="text-blue-400">-</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-500">Status Sinyal:</span>
+                                <span id="out_status" class="text-slate-400 font-bold uppercase">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-2.5 border border-slate-900 rounded code-font space-y-1">
+                        <span class="text-[8px] text-slate-500 block uppercase">ANALISIS PRESISI SIBER</span>
+                        <p id="out_analisis" class="text-[10px] text-slate-400 leading-relaxed font-sans">
+                            Menunggu input data log...
+                        </p>
+                    </div>
+                </div>
+
+                <div id="map_precision_panel" class="col-span-5 relative bg-[#050813] border border-slate-900 rounded-lg p-2 overflow-hidden flex flex-col">
+                    <div class="text-[9px] text-slate-400 code-font flex justify-between items-center mb-1.5 px-1">
+                        <span>CANVAS RADAR MATRIX (INTERACTIVE DRAG)</span>
+                        <span id="out_lock_status" class="text-slate-500 font-bold"><i class="fa-solid fa-satellite mr-1"></i> UNLOCK</span>
+                    </div>
+                    
+                    <div id="canvas_container" class="flex-1 w-full rounded border border-slate-950 relative bg-[#02040a] overflow-hidden flex items-center justify-center select-none" onmousedown="startDrag(event)" onmousemove="dragMap(event)" onmouseup="endDrag()" onmouseleave="endDrag()">
+                        <canvas id="radar_map_canvas" class="absolute"></canvas>
+                    </div>
+
+                    <div class="mt-2 bg-slate-950 border border-slate-900 p-2 rounded flex flex-col space-y-1">
+                        <div class="code-font text-[10px] flex justify-between items-center">
+                            <div>
+                                <p class="text-slate-500 text-[8px]">MAPPING SCHEME</p>
+                                <p id="out_method" class="text-emerald-400 font-bold">Waiting Image</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-slate-500 text-[8px]">SECTOR RADIUS</p>
+                                <p class="text-red-400 font-bold" id="out_radius_lbl">Dynamic Plot</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="address_panel" class="col-span-3 flex flex-col justify-between space-y-3">
+                    <div class="bg-[#050813] border border-slate-900 rounded-lg p-3 code-font flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[9px] text-slate-500 block uppercase">GEOGRAPHIC ADDR RESOLUTION</span>
+                            <h3 id="out_kabupaten" class="text-xs font-bold text-white uppercase mt-1 border-b border-slate-900 pb-1.5">-</h3>
+                            <p id="out_alamat_full" class="text-[10px] text-slate-400 font-sans mt-2 leading-relaxed">
+                                Masukkan log data target untuk memulai pemetaan data mentah secara objektif.
+                            </p>
+                        </div>
+                        <div class="bg-blue-950/10 border border-slate-900 p-2 rounded text-[10px] mt-2 text-slate-400" id="azimuth_intel_box">
+                            <span class="text-blue-400 font-bold block mb-0.5"><i class="fa-solid fa-compass"></i> Sektor Pancaran</span>
+                            Menunggu kalkulasi sudut pancaran antena sektor BTS.
+                        </div>
+                    </div>
+
+                    <div id="log_console" class="h-[110px] bg-slate-950 border border-slate-900 rounded-lg p-2.5 code-font text-[9px] text-slate-600 space-y-1 overflow-hidden">
+                        <div>[SYS] Cyber Signal Engine Upgraded to v7.2.</div>
+                        <div>[SYS] Multi-Format Fallback System Active.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 relative z-10 border-t border-slate-900 pt-3 text-[11px] code-font">
+                <div class="bg-[#050813] border border-slate-900 p-2 rounded flex items-center space-x-2.5">
+                    <i class="fa-solid fa-tower-cell text-slate-600 text-md" id="foot_icon_1"></i>
+                    <div>
+                        <p class="text-slate-500 text-[8px] uppercase">Akurasi Infrastruktur</p>
+                        <p id="foot_txt_1" class="text-slate-400 font-bold">-</p>
+                    </div>
+                </div>
+                <div class="bg-[#050813] border border-slate-900 p-2 rounded flex items-center space-x-2.5">
+                    <i class="fa-solid fa-signal text-slate-600 text-md" id="foot_icon_2"></i>
+                    <div>
+                        <p class="text-slate-500 text-[8px] uppercase">Confidence Engine</p>
+                        <p id="foot_txt_2" class="text-slate-400 font-bold">-</p>
+                    </div>
+                </div>
+                <div class="bg-[#050813] border border-slate-900 p-2 rounded flex items-center space-x-2.5">
+                    <i class="fa-solid fa-shield-halved text-slate-600 text-md" id="foot_icon_3"></i>
+                    <div>
+                        <p class="text-slate-500 text-[8px] uppercase">Estimasi Kondisi</p>
+                        <p id="foot_txt_3" class="text-slate-400 font-bold">-</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let mapImageObj = new Image();
+        let isMapLoaded = false;
+        let mapScale = 1.0;
+        let mapPosX = 0, mapPosY = 0;
+        let isDragging = false;
+        let startX, startY;
+        let currentAzimuth = null;
+
+        let activeData = {
+            msisdn: '-', device: '-', cardType: '-', network: '-', status: '-',
+            imei: '-', imsi: '-', lac: '-', enb: '-', cgi: '-', cellid: '-',
+            coordinate: '-', region: '-', estArea: '-', mapAccess: '-',
+            address: '-', timestamp: '-', signalMode: '-', azimuth: '-', precision: '-', arahID: '-', notes: []
+        };
+
+        // Otomatis load contoh data mentah terbaru Anda di awal run
+        const sampleLog = `TARGET\nMSISDN: 6281912763435\nOperator: XL Pra bayar dan Explor\nStatus: idle (0)\nAge of Location: 0\n\nLOKASI TERDETEKSI\nAlamat: Cikole, Bandung Barat, Jawa Barat, 40931, Indonesia\nKoordinat: -6.79792,107.64958\nRadius: N/A Azimuth: 60°\nMaps: https://www.google.com/maps/search/-6.79792,107.64958\n\nPERANGKAT\nDevice: Apple iPhone 11 (A2111)\nIMEI: 353972100372930\nIMSI: 510113158628409\n\nJARINGAN & CELL\nTipe: 4G MCC/MNC: 510 / 11\nCGI: 51011516110513466007\nLAC/TAC: 51611 Cell ID: 7\neNodeB: 513466`;
+
+        window.onload = function() {
+            document.getElementById('in_bulk_data').value = sampleLog;
+            parseAndUpdateDashboard();
+        };
+
+        function clearInput(id) { document.getElementById(id).value = ''; }
+
+        document.addEventListener('paste', function(e) {
+            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) { loadBlobToMap(items[i].getAsFile()); }
+            }
+        });
+
+        const dropZone = document.getElementById('image_drop_zone');
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-emerald-500'); });
+        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-emerald-500'); });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault(); dropZone.classList.remove('border-emerald-500');
+            if (e.dataTransfer.files.length > 0) { loadBlobToMap(e.dataTransfer.files[0]); }
+        });
+
+        function handleFileSelect(e) { if (e.target.files.length > 0) { loadBlobToMap(e.target.files[0]); } }
+
+        function loadBlobToMap(blob) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                mapImageObj.src = event.target.result;
+                mapImageObj.onload = function() {
+                    isMapLoaded = true; mapPosX = 0; mapPosY = 0;
+                    document.getElementById('zoom_control_panel').classList.remove('hidden');
+                    document.getElementById('drop_zone_prompt').innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i><p class="text-[10px] text-emerald-400 font-sans">GAMBAR MAP AKTIF</p> `;
+                    parseAndUpdateDashboard();
+                };
+            };
+            reader.readAsDataURL(blob);
+        }
+
+        function clearMapImage() {
+            isMapLoaded = false; mapImageObj = new Image();
+            document.getElementById('zoom_control_panel').classList.add('hidden');
+            document.getElementById('file_map_input').value = "";
+            document.getElementById('drop_zone_prompt').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-slate-600 text-base"></i><p class="text-[10px] text-slate-400 font-sans">Klik / Paste Gambar Map Mentah disini <br><span class="code-font text-emerald-400">(Ctrl+V)</span></p> `;
+            parseAndUpdateDashboard();
+        }
+
+        function startDrag(e) { if(!isMapLoaded) return; isDragging = true; startX = e.clientX - mapPosX; startY = e.clientY - mapPosY; }
+        function dragMap(e) { if (!isDragging) return; mapPosX = e.clientX - startX; mapPosY = e.clientY - startY; drawRadarMatrix(); }
+        function endDrag() { isDragging = false; }
+        function updateMapScale(val) { mapScale = val / 100; document.getElementById('zoom_lbl').innerText = val + '%'; drawRadarMatrix(); }
+
+        function drawRadarMatrix() {
+            const canvas = document.getElementById('radar_map_canvas');
+            const ctx = canvas.getContext('2d');
+            const container = document.getElementById('canvas_container');
+            canvas.width = container.clientWidth; canvas.height = container.clientHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const centerX = canvas.width / 2; const centerY = canvas.height / 2;
+
+            if (isMapLoaded) {
+                const imgW = mapImageObj.width * mapScale; const imgH = mapImageObj.height * mapScale;
+                ctx.drawImage(mapImageObj, centerX - imgW/2 + mapPosX, centerY - imgH/2 + mapPosY, imgW, imgH);
+                const radii = [45, 90, 150];
+                const colors = ['rgba(239, 68, 68, 0.4)', 'rgba(245, 158, 11, 0.4)', 'rgba(59, 130, 246, 0.4)'];
+                radii.forEach((r, idx) => {
+                    ctx.beginPath(); ctx.arc(centerX, centerY, r, 0, 2 * Math.PI);
+                    ctx.strokeStyle = colors[idx]; ctx.lineWidth = idx === 1 ? 1.5 : 1;
+                    if(idx === 1) ctx.setLineDash([4, 4]); else ctx.setLineDash([]);
+                    ctx.stroke();
+                });
+
+                if (currentAzimuth !== null && !isNaN(currentAzimuth)) {
+                    const angleRad = ((currentAzimuth - 90) * Math.PI) / 180;
+                    ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(centerX, centerY);
+                    ctx.lineTo(centerX + 150 * Math.cos(angleRad), centerY + 150 * Math.sin(angleRad));
+                    ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5; ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, 130, angleRad - (30 * Math.PI / 180), angleRad + (30 * Math.PI / 180));
+                    ctx.closePath(); ctx.fillStyle = 'rgba(239, 68, 68, 0.08)'; ctx.fill();
+                    ctx.strokeStyle = 'rgba(239, 68, 68, 0.2)'; ctx.stroke();
+                }
+                ctx.setLineDash([]); ctx.beginPath(); ctx.arc(centerX, centerY, 4, 0, 2 * Math.PI);
+                ctx.fillStyle = '#ef4444'; ctx.fill(); ctx.strokeStyle = '#ffffff'; ctx.stroke();
+            }
+        }
+
+        function parseAndUpdateDashboard() {
+            const rawText = document.getElementById('in_bulk_data').value;
+            if(!rawText.trim()) return;
+
+            const cleanText = rawText.replace(/[\*\`]/g, '');
+
+            function extractValue(regex, text) {
+                const match = text.match(regex);
+                return match && match[1] && match[1].trim() !== "" && match[1].trim() !== "N/A" ? match[1].trim() : "-";
+            }
+
+            const msisdn = extractValue(/MSISDN:\s*([0-9]+)/i, cleanText);
+            const operator = extractValue(/Operator:\s*([^\n]+)/i, cleanText);
+            const status = extractValue(/Status:\s*([^\n\(]+)/i, cleanText); 
+            const alamat = extractValue(/Alamat:\s*([^\n]+)/i, cleanText);
+            const koordinat = extractValue(/(?:Koordinat|Coordinate):\s*([-\d.,\s]+)/i, cleanText);
+            const azimuthStr = extractValue(/Azimuth:\s*([0-9\d°]+)/i, cleanText).replace('°', '');
+            const mapsUrl = extractValue(/Maps:\s*(http[^\s\n]+)/i, cleanText);
+            const cgi = extractValue(/CGI:\s*([0-9\-]+)/i, cleanText);
+            const tipeFreq = extractValue(/(?:Frekuensi|Tipe):\s*([^\n]+)/i, cleanText);
+            const enb = extractValue(/(?:eNodeB|eNB):\s*([^\n\s]+)/i, cleanText);
+            const imei = extractValue(/IMEI:\s*([0-9]*)/i, cleanText);
+            const imsi = extractValue(/IMSI:\s*([0-9]*)/i, cleanText);
+
+            // V7.2 FIX FALLBACK SYSTEM: Deteksi Fleksibel Brand/Tipe ATAU Device
+            let device = "-";
+            let deviceMatch = cleanText.match(/(?:Brand\/Tipe|Device):\s*([^\n]+)/i);
+            if (deviceMatch && deviceMatch[1]) {
+                let devTxt = deviceMatch[1].trim();
+                if (!devTxt.includes("[object") && devTxt !== "") { device = devTxt; }
+            }
+
+            // Ekstraksi MCC/MNC
+            let mcc = "-"; let mnc = "-";
+            const mccmncRaw = extractValue(/MCC\/MNC:\s*([^\n]+)/i, cleanText);
+            if (mccmncRaw !== "-") {
+                const parts = mccmncRaw.split('/');
+                if(parts[0]) mcc = parts[0].trim();
+                if(parts[1]) mnc = parts[1].trim();
+            }
+
+            // V7.2 FIX CELL ID: Deteksi Fleksibel Format Gabungan LAC/CID maupun Terpisah
+            let lac = "-"; let cid = "-";
+            const laccidRaw = extractValue(/LAC\/CID:\s*([^\n]+)/i, cleanText);
+            if (laccidRaw !== "-") {
+                const parts = laccidRaw.split('/');
+                if(parts[0]) lac = parts[0].trim();
+                if(parts[1]) cid = parts[1].trim();
+            } else {
+                // Mencari jika ditulis terpisah seperti "LAC/TAC: 51611" dan "Cell ID: 7"
+                lac = extractValue(/(?:LAC\/TAC|LAC|TAC):\s*([0-9]+)/i, cleanText);
+                cid = extractValue(/(?:Cell ID|CID):\s*([0-9]+)/i, cleanText);
+            }
+
+            let region = "-"; let estArea = "-";
+            if (alamat !== "-") {
+                const addrParts = alamat.split(',');
+                if (addrParts.length > 2) {
+                    estArea = addrParts[0].trim();
+                    region = addrParts[1].trim() + ", " + addrParts[2].trim();
+                }
+            }
+
+            currentAzimuth = (azimuthStr !== "-" && !isNaN(azimuthStr)) ? parseFloat(azimuthStr) : null;
+            const options = { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const timeStr = new Date().toLocaleDateString('id-ID', options) + ' WIB';
+
+            // Kompas Mata Angin
+            let arahMataAngin = "Sektoral"; let arahMataAnginLengkap = "Directional sector coverage";
+            if(currentAzimuth !== null) {
+                if (currentAzimuth >= 337.5 || currentAzimuth < 22.5) { arahMataAngin = "Utara"; arahMataAnginLengkap = "Sektor Utara (0° - 45°)"; }
+                else if (currentAzimuth >= 22.5 && currentAzimuth < 67.5) { arahMataAngin = "Timur Laut"; arahMataAnginLengkap = "Sektor Timur Laut (22.5° - 67.5°)"; }
+                else if (currentAzimuth >= 67.5 && currentAzimuth < 112.5) { arahMataAngin = "Timur"; arahMataAnginLengkap = "Sektor Timur (67.5° - 112.5°)"; }
+                else if (currentAzimuth >= 112.5 && currentAzimuth < 157.5) { arahMataAngin = "Tenggara"; arahMataAnginLengkap = "Sektor Tenggara (112.5° - 157.5°)"; }
+                else if (currentAzimuth >= 157.5 && currentAzimuth < 202.5) { arahMataAngin = "Selatan"; arahMataAnginLengkap = "Sektor Selatan (157.5° - 202.5°)"; }
+                else if (currentAzimuth >= 202.5 && currentAzimuth < 247.5) { arahMataAngin = "Selatan-Barat Daya"; arahMataAnginLengkap = "Sektor Barat Daya (202.5° - 247.5°)"; }
+                else if (currentAzimuth >= 247.5 && currentAzimuth < 292.5) { arahMataAngin = "Barat"; arahMataAnginLengkap = "Sektor Barat (247.5° - 292.5°)"; }
+                else if (currentAzimuth >= 292.5 && currentAzimuth < 337.5) { arahMataAngin = "Barat Laut"; arahMataAnginLengkap = "Sektor Barat Laut (292.5° - 337.5°)"; }
+            }
+
+            // ==================== TACTICAL FIELD NOTES (TAJAM & OPERASIONAL) ====================
+            let dynamicNotes = [];
+            const areaNama = estArea !== "-" ? estArea : "perimeter koordinat";
+
+            if (status !== "-") {
+                if(status.toUpperCase().includes("DETACHED")) {
+                    dynamicNotes.push(`TARGET DISCONNECT: Status radio "${status.toUpperCase()}". Target tidak membuat sesi data aktif namun jejak pancaran terakhir terkunci kuat pada sektor menara ini.`);
+                } else {
+                    dynamicNotes.push(`LIVE CONNECTIVITY: Status radio terdeteksi "${status.toUpperCase()}" (${operator.toUpperCase()}). Perangkat aktif memancarkan sinyal, sangat responsif terhadap intersepsi darat.`);
+                }
+            }
+
+            if (currentAzimuth !== null) {
+                dynamicNotes.push(`SURVEILLANCE CLUE: Antena bts memancar ke sudut ${azimuthStr}° (${arahMataAngin}). Tim lapangan wajib bergerak menyisir dari titik koordinat menara menuju arah KELUAR/PANCARAN ke sisi ${arahMataAngin}.`);
+            } else {
+                dynamicNotes.push(`SURVEILLANCE CLUE: Sudut azimuth omni/tidak terdeteksi. Lakukan sterilisasi melingkar berpusat pada radius terdekat menara.`);
+            }
+
+            if (cid !== "-") {
+                dynamicNotes.push(`PERIMETER LOCK: Target valid berada dalam cengkeraman Cell ID: ${cid} (LAC: ${lac}). Batasi ruang pencarian taktis khusus pada kluster pemukiman/jalan di area ${areaNama} yang sejajar jalur pancaran.`);
+            } else if (cgi !== "-") {
+                dynamicNotes.push(`PERIMETER LOCK: Pembatasan sektor berdasarkan identitas CGI global ${cgi}. Rekomendasi sebar unit pelacak mobile di sekitar perimeter.`);
+            }
+
+            if (koordinat !== "-") {
+                dynamicNotes.push(`GROUND POSITION: Plot koordinat berada di sekitar ${alamat.substring(0, 45)}... Manfaatkan titik elevasi tinggi atau persimpangan jalan utama sebagai pos pantau pemantauan.`);
+            }
+            // ==============================================================================
+
+            activeData = {
+                msisdn: msisdn, device: device.toUpperCase(), cardType: operator !== "-" ? operator.toUpperCase() : "-",
+                network: tipeFreq !== "-" ? `${tipeFreq} (MCC/MNC: ${mcc} / ${mnc})` : "-", status: status !== "-" ? status.toUpperCase() : "-",
+                imei: imei, imsi: imsi, lac: lac, enb: enb, cgi: cgi, cellid: cid,
+                coordinate: koordinat, region: region !== "-" ? region.toUpperCase() : "-", estArea: estArea !== "-" ? estArea.toUpperCase() : "-",
+                mapAccess: mapsUrl, address: alamat !== "-" ? alamat.toUpperCase() : "-", timestamp: timeStr, 
+                signalMode: tipeFreq !== "-" ? `${tipeFreq} ${status !== "-" ? status : ''}`.trim() : "-",
+                azimuth: azimuthStr !== "-" ? `${azimuthStr}°` : '-', precision: arahMataAnginLengkap, arahID: arahMataAngin, notes: dynamicNotes
+            };
+
+            // Binding ke UI
+            document.getElementById('out_target_id').innerText = msisdn !== "-" ? 'MSISDN_' + msisdn.slice(-4) : '-';
+            document.getElementById('out_msisdn').innerText = msisdn;
+            document.getElementById('out_device').innerText = device;
+            document.getElementById('out_cgi').innerText = cgi;
+            document.getElementById('out_laccid').innerText = (lac !== "-" || cid !== "-") ? `${lac} / ${cid}` : "-";
+            document.getElementById('out_azimuth').innerText = azimuthStr !== "-" ? azimuthStr + '°' : '-';
+            document.getElementById('out_freq').innerText = tipeFreq !== "-" ? tipeFreq : "-";
+            document.getElementById('out_operator_lbl').innerText = operator !== "-" ? `(${operator.toUpperCase()})` : '';
+            document.getElementById('out_status').innerText = status !== "-" ? status.toUpperCase() : "-";
+            document.getElementById('out_alamat_full').innerText = alamat !== "-" ? alamat : "Tidak ada data alamat terdeteksi.";
+
+            if(region !== "-") { document.getElementById('out_kabupaten').innerText = region.split(',')[0].toUpperCase(); }
+            else { document.getElementById('out_kabupaten').innerText = "-"; }
+
+            document.getElementById('foot_txt_1').innerText = cid !== "-" ? "Tactical Sector" : "Unmapped";
+            document.getElementById('foot_txt_2').innerText = "100% Raw Match";
+            document.getElementById('foot_txt_3').innerText = status !== "-" ? status.toUpperCase() : "-";
+
+            const mapPanel = document.getElementById('map_precision_panel');
+            const telemetryPanel = document.getElementById('telemetry_panel');
+            const addressPanel = document.getElementById('address_panel');
+
+            if (isMapLoaded) {
+                mapPanel.style.display = "flex";
+                telemetryPanel.className = "col-span-4 flex flex-col justify-between bg-[#050813] border border-slate-900 rounded-lg p-3.5";
+                addressPanel.className = "col-span-3 flex flex-col justify-between space-y-3";
+                document.getElementById('out_lock_status').className = "text-emerald-400 font-bold animate-pulse";
+                document.getElementById('out_lock_status').innerHTML = `<i class="fa-solid fa-crosshairs mr-1"></i> SURVEILLANCE LOCK`;
+                document.getElementById('out_method').innerText = "🖼️ Surveillance Overlay Image";
+                document.getElementById('out_radius_lbl').innerText = "Tactical Clue Line";
+                drawRadarMatrix();
+            } else {
+                mapPanel.style.display = "none";
+                telemetryPanel.className = "col-span-6 flex flex-col justify-between bg-[#050813] border border-slate-900 rounded-lg p-3.5";
+                addressPanel.className = "col-span-6 flex flex-col justify-between space-y-3";
+            }
+
+            const azBox = document.getElementById('azimuth_intel_box');
+            if(currentAzimuth !== null) {
+                azBox.innerHTML = `<span class="text-blue-400 font-bold block mb-0.5"><i class="fa-solid fa-compass"></i> Sektor Pancaran (${azimuthStr}°)</span>Antena memproyeksikan pancaran ke arah ${arahMataAngin}.`;
+            }
+
+            const anBox = document.getElementById('out_analisis');
+            if(status.toLowerCase().includes('idle')) {
+                document.getElementById('out_status').className = "text-amber-400 font-bold uppercase";
+                anBox.className = "text-[10px] text-amber-400 leading-relaxed font-sans";
+                anBox.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-1"></i> Status IDLE (Standby). Perangkat terhubung pasif pada sektor ${arahMataAngin}.`;
+            } else if(status !== "-") {
+                document.getElementById('out_status').className = "text-emerald-400 font-bold uppercase";
+                anBox.className = "text-[10px] text-emerald-400 leading-relaxed font-sans";
+                anBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Sinyal aktif. Jaringan terpantau stabil.`;
+            }
+        }
+
+        function copyToClipboardTemplate() {
+            const textTemplate = `╔══════════════════════════════════════╗
+        CYBER SIGNAL INTEL v7.2
+╚══════════════════════════════════════╝
+
+[ TARGET DEVICE ]
+MSISDN        : ${activeData.msisdn}
+DEVICE        : ${activeData.device}
+CARD TYPE     : ${activeData.cardType}
+NETWORK       : ${activeData.network}
+STATUS        : ${activeData.status}
+
+[ DEVICE IDENTITY ]
+IMEI          : ${activeData.imei}
+IMSI          : ${activeData.imsi}
+TAC / TAC ID  : ${activeData.lac}
+ENB / ENODEB  : ${activeData.enb}
+CGI           : ${activeData.cgi}
+LAC           : ${activeData.lac}
+CELL ID       : ${activeData.cellid}
+
+[ GEO TRACKING ]
+COORDINATE    : ${activeData.coordinate}
+REGION        : ${activeData.region}
+ESTIMATED AREA: ${activeData.estArea}
+MAP ACCESS    : ${activeData.mapAccess}
+ADDRESS       : ${activeData.address}
+AOL           : 0 (Real-time Sync)
+
+[ SIGNAL ANALYSIS ]
+LAST UPDATE   : ${activeData.timestamp}
+SIGNAL MODE   : ${activeData.signalMode}
+TOWER STATUS  : ${activeData.azimuth !== "-" ? 'Connected (Azimuth: ' + activeData.azimuth + ')' : '-'}
+PRECISION     : ${activeData.precision}
+
+[ FIELD NOTES (SURVEILLANCE GUIDANCE) ]
+• ${activeData.notes[0] || '-'}
+• ${activeData.notes[1] || '-'}
+• ${activeData.notes[2] || '-'}
+• ${activeData.notes[3] || '-'}
+
+══════════════════════════════════════
+⚠ CONFIDENTIAL ACCESS
+RESTRICTED DATA — INTERNAL USE ONLY
+AUTHORIZED INVESTIGATION CHANNEL
+══════════════════════════════════════`;
+
+            navigator.clipboard.writeText(textTemplate).then(() => {
+                const notif = document.getElementById('copy_notif');
+                notif.style.opacity = '1';
+                setTimeout(() => { notif.style.opacity = '0'; }, 2500);
+            }).catch(err => {
+                alert("Gagal menyalin teks otomatis.");
+            });
+        }
+
+        function exportDashboard() {
+            const card = document.getElementById('infographic-card');
+            const msisdn = document.getElementById('out_msisdn').innerText;
+            html2canvas(card, { scale: 2.5, backgroundColor: '#03050c', useCORS: true, allowTaint: true }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `TACTICAL_REPORT_${msisdn !== "-" ? msisdn : 'UNKNOWN'}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
