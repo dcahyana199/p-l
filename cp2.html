@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Signal Intel v7.2 - Final</title>
+    <style>
+        body { background: #000; color: #00ff00; font-family: 'Courier New', Courier, monospace; padding: 20px; }
+        .controls { margin-bottom: 15px; }
+        button { background: #00ff00; color: #000; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; margin-right: 10px; }
+        #output { white-space: pre-wrap; border: 1px solid #00ff00; padding: 20px; background: #050505; min-height: 400px; }
+    </style>
+</head>
+<body>
+    <h2>CYBER SIGNAL INTEL - PASTE IMAGE</h2>
+    <div class="controls">
+        <button onclick="clearData()">Clear Data</button>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+    <pre id="output">Klik di area ini/halaman ini lalu tekan Ctrl + V untuk Paste Gambar target...</pre>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script>
+        // Fitur Copy
+        function copyToClipboard() {
+            const text = document.getElementById('output').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Data berhasil disalin! Silakan paste ke WA/Telegram.");
+            });
+        }
+
+        // Fitur Clear
+        function clearData() {
+            document.getElementById('output').innerText = "Data dibersihkan. Silakan paste gambar baru...";
+        }
+
+        // Fitur Paste
+        document.addEventListener('paste', async (e) => {
+            const item = e.clipboardData.items[0];
+            if (item?.type.startsWith('image')) {
+                processImage(item.getAsFile());
+            }
+        });
+
+        async function processImage(file) {
+            const output = document.getElementById('output');
+            output.innerText = "Memproses intelijen, mohon tunggu...";
+            
+            const { data: { text } } = await Tesseract.recognize(file, 'ind');
+            
+            const getVal = (keywords, defaultValue = "[DATA NOT DETECTED]") => {
+                const lines = text.split('\n');
+                for (let line of lines) {
+                    for (let kw of keywords) {
+                        if (line.toLowerCase().includes(kw.toLowerCase())) {
+                            return line.replace(new RegExp(kw, 'gi'), '').replace(/[:\/\s-]+/, '').trim() || defaultValue;
+                        }
+                    }
+                }
+                return defaultValue;
+            };
+
+            const findURL = () => {
+                const urlMatch = text.match(/(https?:\/\/[^\s]+)/i);
+                return urlMatch ? urlMatch[0] : "[DATA NOT DETECTED]";
+            };
+
+            const template = `╔══════════════════════════════════════╗
+        CYBER SIGNAL INTEL v7.2
+╚══════════════════════════════════════╝
+
+[ TARGET DEVICE ]
+MSISDN        : ${getVal(['MSISDN'])}
+DEVICE        : ${getVal(['Device', 'Brand/Tipe'])}
+CARD TYPE     : ${getVal(['Operator'])}
+NETWORK       : ${getVal(['Frekuensi', 'Tipe'])}
+STATUS        : ${getVal(['Status'])}
+
+[ DEVICE IDENTITY ]
+IMEI          : ${getVal(['IMEI'])}
+IMSI          : ${getVal(['IMSI'])}
+ENB / ENODEB  : ${getVal(['eNodeB', 'ENB'])}
+CGI           : ${getVal(['CGI'])}
+LAC           : ${getVal(['LAC', 'LAC/TAC'])}
+CELL ID       : ${getVal(['Cell ID', 'CID'])}
+
+[ GEO TRACKING ]
+COORDINATE    : ${getVal(['Koordinat'])}
+ADDRESS       : ${getVal(['Alamat'])}
+MAP ACCESS    : ${findURL()}
+
+[ SIGNAL ANALYSIS ]
+TOWER STATUS  : Connected (Azimuth: ${getVal(['Azimuth'])})
+PRECISION     : Sektor Berdasarkan Azimuth ${getVal(['Azimuth'])}
+
+[ FIELD NOTES (SURVEILLANCE GUIDANCE) ]
+• LIVE CONNECTIVITY: Perangkat aktif dalam status ${getVal(['Status'])}.
+• SURVEILLANCE CLUE: Sinyal dipancarkan ke arah ${getVal(['Azimuth'])}. Lakukan penyisiran searah pancaran.
+• PERIMETER LOCK: Target terdeteksi pada Cell ID: ${getVal(['Cell ID', 'CID'])} (LAC: ${getVal(['LAC', 'LAC/TAC'])}).
+• GROUND POSITION: Plot koordinat ${getVal(['Koordinat'])} berada di area ${getVal(['Alamat']).split(',')[0]}.
+
+══════════════════════════════════════
+⚠ CONFIDENTIAL ACCESS
+RESTRICTED DATA — INTERNAL USE ONLY
+AUTHORIZED INVESTIGATION CHANNEL
+══════════════════════════════════════`;
+            
+            output.innerText = template;
+        }
+    </script>
+</body>
+</html>
